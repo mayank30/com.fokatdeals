@@ -1,0 +1,280 @@
+
+/*====================================*\
+	GLOBALS
+\*====================================*/
+
+.hide {
+	display: none
+}
+.show {
+	display: block
+}
+
+/*====================================*\
+	MAIN
+\*====================================*/
+.container {
+	margin: 0 auto;
+	position: relative;
+	width: 986px
+}
+/*	footer */
+#toggle-footer:checked + footer .footerwrapper {
+	margin-bottom: 0
+}
+#toggle-footer:checked + footer .toggler {
+	height: 0
+}
+#toggle-footer:checked + footer .toggler label {
+	background-position: center -188px
+}
+#toggle-footer:checked + footer .toggler label:hover {
+	background-position: center -288px
+}
+footer {
+	-webkit-box-shadow: 0 -2px 2px 0 rgba(0, 0, 0, .1);
+	box-shadow: 0 -2px 2px 0 rgba(0, 0, 0, .1);
+	bottom: 0;
+	left: 0;
+	min-height: 0px;
+	position: fixed;
+	width: 100%;
+	z-index: 1000
+}
+footer .toggler {
+	-moz-transition: height .2s ease;
+	-ms-transition: height .2s ease;
+	-o-transition: height .2s ease;
+	-webkit-transition: height .2s ease;
+	height: 5px;
+	position: relative;
+	transition: height .2s ease;
+	background-color: #fff;
+}
+footer .toggler label {
+	-webkit-border-radius: 5px 5px 0 0;
+	-webkit-box-shadow: 0 -2px 2px 0 rgba(0, 0, 0, .1);
+	background-color: #fff;
+	background-image: url(../images/arrow-6.png);
+	border-top-color: #ff6700;
+	background-position: center 12px;
+	background-repeat: no-repeat;
+	border-radius: 5px 5px 0 0;
+	border-top-style: solid;
+	border-top-width: 2px;
+	box-shadow: 0 -2px 2px 0 rgba(0, 0, 0, .1);
+	cursor: pointer;
+	height: 40px;
+	left: 50%;
+	margin-left: -27px;
+	overflow: hidden;
+	position: absolute;
+	text-indent: -5000px;
+	top: -40px;
+	width: 55px;
+	z-index: 1000
+}
+footer .footerwrapper {
+	-moz-transition: margin-bottom .2s ease;
+	-ms-transition: margin-bottom .2s ease;
+	-o-transition: margin-bottom .2s ease;
+	-webkit-transition: margin-bottom .2s ease;
+	margin-bottom: -500px;
+	position: relative;
+	transition: margin-bottom .2s ease
+}
+footer .footerbar {
+	background-color: #fff
+}
+footer .footerbar .container {
+	overflow: hidden
+}
+footer .footerbar .cell {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	float: left;
+	padding-bottom: 21px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 14px;
+	width: 20%
+}
+footer .footerbar .cell:first-child {
+	padding-left: 0
+}
+footer .footerbar .cell:last-child {
+	padding-left: 21px;
+	padding-right: 0;
+	position: relative
+}
+footer .footerbar .cell:last-child:before {
+	background-color: #f4f4f6;
+	content: '';
+	height: 300%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 1px
+}
+footer .footerbar .cell .title-2 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 139px
+}
+footer .footerbar .cell .title-2 + .links, footer .footerbar .cell .title-2 + .soclinks {
+	padding-top: 6px
+}
+footer .footerbar .cell .title-2 + .notification {
+	margin-top: 11px
+}
+footer .footerbar .cell ul {
+	color: #999;
+	list-style-type: none
+}
+footer .footerbar .cell .links {
+	font-size: 13px;
+	line-height: 17px
+}
+footer .footerbar .cell .links li {
+	margin-top: 7px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%
+}
+footer .footerbar .cell .links li a {
+	color: #999
+}
+footer .footerbar .cell .links li a:hover {
+	color: #ff6700
+}
+footer .footerbar .cell .soclinks li {
+	float: left;
+	margin-right: 9px;
+	margin-top: 9px
+}
+footer .footerbar .cell .soclinks li a {
+	-moz-transition: all 0.4s ease;
+	-ms-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	-webkit-transition: all 0.4s ease;
+	background-position: left top;
+	background-repeat: no-repeat;
+	display: block;
+	height: 32px;
+	overflow: hidden;
+	text-indent: -5000px;
+	transition: all 0.4s ease;
+	width: 32px
+}
+footer .footerbar .cell .soclinks li a:hover {
+	background-position: left bottom
+}
+footer .footerbar .cell .soclinks li a.icon-footer-fb {
+	background-image: url(../images/icon-footer-fb.png)
+}
+footer .footerbar .cell .soclinks li a.icon-footer-youtube {
+	background-image: url(../images/icon-footer-youtube.png)
+}
+footer .footerbar .cell .soclinks li a.icon-footer-pin {
+	background-image: url(../images/icon-footer-pin.png)
+}
+footer .footerbar .cell .soclinks li a.icon-footer-tw {
+	background-image: url(../images/icon-footer-tw.png)
+}
+footer .footerbar .cell .soclinks li a.icon-footer-instagram {
+	background-image: url(../images/icon-footer-instagram.png)
+}
+footer .footerbar .cell .soclinks li a.icon-footer-linkedin {
+	background-image: url(../images/icon-footer-linkedin.png)
+}
+footer .footerbar .cell .soclinks li a.icon-footer-gplus {
+	background-image: url(../images/icon-footer-gplus.png)
+}
+footer .footerbar .cell .soclinks li a.icon-footer-behance {
+	background-image: url(../images/icon-footer-behance.png)
+}
+footer .footerbar .cell .soclinks li a.icon-footer-flickr {
+	background-image: url(../images/icon-footer-flickr.png)
+}
+footer .footerbar .cell .soclinks li a.icon-footer-soundcloud {
+	background-image: url(../images/icon-footer-soundcloud.png)
+}
+footer .footerbar .cell .soclinks li a.icon-footer-vimeo {
+	background-image: url(../images/icon-footer-vimeo.png)
+}
+footer .footerbar .cell .soclinks li a.icon-footer-foursquare {
+	background-image: url(../images/icon-footer-foursquare.png)
+}
+footer .copyright {
+	background-color: #f3f3f5;
+	color: #999;
+	font-size: 12px;
+	line-height: 16px;
+	padding-bottom: 12px;
+	padding-top: 9px;
+	text-align: center
+}
+
+
+
+/*	pinthis layout */
+@media only screen and (max-width: 1033px) {
+
+	footer .footerbar .cell {
+		width: 25%
+	}
+	footer .footerbar .cell:nth-child(4) {
+		padding-right: 0
+	}
+	footer .footerbar .cell:last-child {
+		border-left: none;
+		border-top: 1px solid #1e243a;
+		padding-left: 0;
+		width: 100%
+	}
+	footer .footerbar .cell:last-child:before {
+		display: none
+	}
+}
+
+@media only screen and (max-width: 720px) {
+
+
+	footer {
+		bottom: auto;
+		left: auto;
+		margin-top: 40px;
+		position: relative;
+		width: auto
+	}
+	.footer-spinner {
+		top: -35px
+	}
+	footer .toggler {
+		display: block
+	}
+	footer .footerwrapper {
+		margin-bottom: 0
+	}
+	footer .footerbar .cell {
+		padding-left: 10px;
+		padding-right: 10px
+	}
+
+}
+@media only screen and (max-width: 600px) {
+
+	footer .footerbar .cell {
+		width: 50%
+	}
+	footer .footerbar .cell:nth-child(2) {
+		padding-right: 0
+	}
+	footer .footerbar .cell:nth-child(3) {
+		clear: both;
+		padding-left: 0
+	}
+}
