@@ -65,6 +65,19 @@ body{ background-color:#f0f0f0; }
   float:left;
 }
 
+.brandsMenu {
+    padding:5px;
+}
+
+.brandsMenu a{
+    padding:20px;
+    border:1px solid black;
+}
+
+.brandsMenu img {
+    height:80px;
+    max-width:120px;
+}
 .show-grid{background-color:#fff; }
 
 

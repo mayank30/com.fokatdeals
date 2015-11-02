@@ -18,62 +18,40 @@ namespace com.fokatdeals
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           // Register("m", "m", "m");
-            //RunMe();
-            //Response.Write(AppConstants.GENERATED_PASSWORD+"   <br/>"+AppConstants.UNIQUE_ID);
+          
         }
+        #region "Product Display Related"
 
-        public void ImageDate(String imageUrl1,out String imageUrl,out string width,out String height)
-        {
-           
-            try
-            {
-                WebRequest request = WebRequest.Create(imageUrl1);
-                WebResponse response = request.GetResponse();
-                Image image = Image.FromStream(response.GetResponseStream());
-                imageUrl = imageUrl1;
-                width = image.Width + "px";
-                height = image.Height + "px";
-            }
-            catch
-            {
-                //Image Not Found Kindly Set Default Image in database.
-                imageUrl = Properties.Settings.Default.Domain + "/images/no-product.png";
-                width = "200px"; height = "300px";
-            }
-        }
-        public void RunMe()
-        {
-            int count = 23546;
-            int i = 2226;
-            int next;
-            DataTable dt = new DataTable();
-            ProductDAL dal = new ProductDAL();
-            //while (count > 0)
-            //{
-                dt = dal.GetProductByPagination(i, count, out next);
-             //   count = count - next;
-                foreach (DataRow dtrow in dt.Rows)
-                {
-                    Response.Write("Run " + dtrow["name"].ToString() + " <br>");
-                    String width, height, imageurl;
-                    ImageDate(dtrow["imageUrl"].ToString(), out imageurl, out width, out height);
-                    dal.UpdateProductImageData(dtrow["uniqueid"].ToString(), imageurl, width, height);
-                }
-            //    i = next;
-            //}
-
-        }
-
-
-        
         [WebMethod]
-        public static String SampleTest()
+        public static String RandomProduct()
         {
-            String domain = Properties.Settings.Default.Domain;
             DataTable dt = new DataTable();
             ProductDAL dal = new ProductDAL();
             dt = dal.GetRandomProduct();
+            return getProductJsonIncludePage(dt, 0);
+        }
+
+        [WebMethod]
+        public static String SingleProduct(String value)
+        {
+            DataTable dt = new DataTable();
+            ProductDAL dal = new ProductDAL();
+            dt = dal.GetProduct(value);
+            return getProductJsonIncludePage(dt,0);
+        }
+
+
+        [WebMethod]
+        public static String GetProductByPagination(int index,String value)
+        {
+            DataTable dt = new DataTable();
+            ProductDAL dal = new ProductDAL();
+            dt = dal.GetProductByPagination(index,AppConstants.PRODUCT_PAGE_SIZE,value);
+            return getProductJsonIncludePage(dt,index);
+        }
+
+        private static String getProductJsonIncludePage(DataTable dt,int index)
+        {
             if (dt != null)
             {
                 List<ProductModel> details = new List<ProductModel>();
@@ -91,17 +69,21 @@ namespace com.fokatdeals
                     obj.OfferPrice = dtrow["offerprice"].ToString();
                     obj.UniqueId = dtrow["uniqueId"].ToString();
                     obj.PrdId = dtrow["prdid"].ToString();
+                    obj.pageSize = AppConstants.PRODUCT_PAGE_SIZE.ToString();
+                    obj.pageNext = (index + AppConstants.PRODUCT_PAGE_SIZE + 1).ToString();
                     details.Add(obj);
                 }
 
                 JavaScriptSerializer ser = new JavaScriptSerializer();
                 return ser.Serialize(details);
             }
-            else {
+            else
+            {
                 return "No Product Found";
             }
         }
 
+        #endregion
 
         [WebMethod]
         public static String DisplayProduct(String value)
@@ -159,6 +141,7 @@ namespace com.fokatdeals
             return "<div class = 'grid' style='width:310px;height:310px; padding:0px; color:#ffffff;background:#A8A3A3; font-size:14px;'><b class='pull-left'>Top Categories</b><div class='col-md-12 column' id='cat'><div class='col-md-4 column'><div class='row'><a href='brands'>Brands</a></div><div class='row'><a href='flower-n-gifting-ideas'>Flower & Gifts</a></div><div class='row'><a href='books-and-staitionary'>Books & Staitionary</a></div><div class='row'><a href='health-and-beauty'>Health & Beauty</a></div><div class='row'><a href='mobile-and-accessories'>Mobile & Tablets</a></div><div class='row'><a href='kids-and-baby-store'>Kids & Baby</a></div></div><div class='col-md-4 column'><div class='row'><a href='sports-and-fitness'>Sports & Fitness</a></div><div class='row'><a href='clothings'>Clothing</a></div><div class='row'><a href='camera-and-accessories'>Cameras & Accessories</a></div><div class='row'><a href='household-appliance'>Household Appliance</a></div><div class='row'><a href='footwears-fashion-for-means-womens'>Footwears</a></div><div class='row'><a href='jewellery-gold-sliver-daimonds'>Jewellery</a></div></div><div class='col-md-4 column'><div class='row'><a href='computer-and-laptops'>Computers & Laptops</a></div><div class='row'><a href='home-kitchen-decor'>Home & Kitchen Decor</a></div><div class='row'><a href='fashion-accessories'>Fashion Accessories</a></div><div class='row'><a href='travels-and-hotels'>Travels & Hotels</a></div><div class='row'><a href='electronics'>Electronics</a></div><div class='row'><a href='food-products'>Food Products</a></div></div></div></div>";
         }
 
+        #region "User Account Related"
 
         [System.Web.Services.WebMethod(EnableSession = true)]
         public static String Login(String username,String password,String data)
@@ -240,7 +223,6 @@ namespace com.fokatdeals
             return ser.Serialize(user);
         }
 
-
         [WebMethod]
         public static String ChangePassword(String email)
         {
@@ -294,11 +276,154 @@ namespace com.fokatdeals
         }
         private static void setUserSession(UserModel user)
         {
-            HttpContext.Current.Session[AppConstants.SESSION_USER_ID] = user.username;
+            HttpContext.Current.Session[AppConstants.SESSION_UNIQUE_ID] = user.sessionId;
+            HttpContext.Current.Session[AppConstants.SESSION_USER_ID] = user.id;
+            HttpContext.Current.Session[AppConstants.SESSION_USERNAME] = user.username;
             HttpContext.Current.Session[AppConstants.SESSION_EMAIL_ID] = user.email;
             HttpContext.Current.Session[AppConstants.SESSION_USER_TYPE] = user.userType;
-            HttpContext.Current.Session[AppConstants.SESSION_UNIQUE_ID] = user.sessionId;
+        
         }
+        #endregion
+
+        #region "Wishlist Section"
+        public class WishList : CommonModel
+        {
+            public String id { get; set; }
+            public String userid { get; set; }
+            public String prdid { get; set; }
+            public String createdDate { get; set; }
+            public String code { get; set; }
+        }
+     
+        [WebMethod]
+        public static String AddToWishList(String prdid)
+        {
+            WishList wl = new WishList();
+            ProductDAL dal = new ProductDAL();
+            int i = dal.InsertWishList(prdid, HttpContext.Current.Session[AppConstants.SESSION_USER_ID].ToString());
+            return "";
+        }
+
+        [WebMethod]
+        public static String RemoveFromWishList(String prdid)
+        {
+            WishList wl = new WishList();
+            ProductDAL dal = new ProductDAL();
+            int i = dal.DeleteWishList(prdid, HttpContext.Current.Session[AppConstants.SESSION_USER_ID].ToString());
+            return "";
+        }
+
+
+        [WebMethod]
+        public static String GetUserWishList(String prdid)
+        {
+            WishList obj = new WishList();
+            DataTable dt = new DataTable();
+            ProductDAL dal = new ProductDAL();
+            List<WishList> details = new List<WishList>();
+            dt = dal.GetUserWishList(prdid, HttpContext.Current.Session[AppConstants.SESSION_USER_ID].ToString());
+            if (dt != null)
+            {
+                foreach (DataRow dtrow in dt.Rows)
+                {
+                    
+                    obj.id = dtrow["id"].ToString();
+                    obj.userid = dtrow["userid"].ToString();
+                    obj.prdid = dtrow["prdid"].ToString();
+                    obj.code = dtrow["code"].ToString();
+                    obj.createdDate = dtrow["createdDate"].ToString();
+                    obj.errorCode = 10001;
+                    obj.errorMessage = "Successfully Retrival";
+                    details.Add(obj);
+                }
+
+                
+            }
+            else
+            {
+                obj.errorCode = 10001;
+                obj.errorMessage = "Successfully Retrival";
+            }
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            return ser.Serialize(details);
+        }
+        #endregion
+
+
+        [WebMethod]
+        public static String GetBaseCategory()
+        {
+            CategoryModel obj = new CategoryModel();
+            DataTable dt = new DataTable();
+            ProductDAL dal = new ProductDAL();
+            List<CategoryModel> details = new List<CategoryModel>();
+            dt = dal.GetBaseCategory();
+            if (dt != null)
+            {
+                foreach (DataRow dtrow in dt.Rows)
+                {
+                    obj = new CategoryModel();
+                    obj.CatId = dtrow["catid"].ToString();
+                    obj.CatName = dtrow["catname"].ToString();
+                    obj.Status = dtrow["catstatus"].ToString();
+                    obj.CatHotStatus = dtrow["cathotstatus"].ToString();
+                    obj.CatAlias = dtrow["categoryAlias"].ToString();
+                    obj.CatUrl = Properties.Settings.Default.Domain + "/!/" + dtrow["categoryAlias"].ToString();
+                    obj.errorCode = (int) Errors.CategorySuccess;
+                    obj.errorMessage = "Successfully Retrival";
+                    details.Add(obj);
+                }
+
+
+            }
+            else
+            {
+                obj.errorCode = (int)Errors.CategoryError;
+                obj.errorMessage = "Error while Retrival";
+            }
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            return ser.Serialize(details);
+        }
+
+        #region "Affiliated Store"
+        [WebMethod]
+        public static String GetAffiliatedStore()
+        {
+            DataTable dt = new DataTable();
+            StoreDAL dal = new StoreDAL();
+            dt = dal.GetStore();
+            if (dt != null)
+            {
+                List<StoreModel> details = new List<StoreModel>();
+                foreach (DataRow dtrow in dt.Rows)
+                {
+                    StoreModel obj = new StoreModel();
+                    obj.AffCode = dtrow["affCode"].ToString();
+                    obj.AffUrl = dtrow["affUrl"].ToString();
+                    obj.Description = dtrow["description"].ToString();
+                    obj.Logo = dtrow["logo"].ToString();
+                    obj.Rating = dtrow["ratings"].ToString();
+                    obj.SeoUrl = dtrow["seourl"].ToString();
+                    obj.Source = dtrow["source"].ToString();
+                    obj.Status = dtrow["status"].ToString();
+                    obj.Storeid = dtrow["storeid"].ToString();
+                    obj.Storename = dtrow["storename"].ToString();
+                    obj.Website = dtrow["websiteLink"].ToString();
+                    obj.errorCode = 9001;
+                    obj.errorMessage = "Store Found.";
+                    details.Add(obj);
+                }
+
+                JavaScriptSerializer ser = new JavaScriptSerializer();
+                return ser.Serialize(details);
+            }
+            else
+            {
+                return "No Store Found";
+            }
+        }
+
+        #endregion
 
     }
 

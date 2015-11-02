@@ -10,7 +10,8 @@ namespace com.fokatdeals
         public int errorCode { get; set; }
         public String errorMessage { get; set; }
         public String sessionId { get; set; }
-
+        public String pageSize { get; set; }
+        public String pageNext { get; set; }
         public String UniqueId()
         {
             return Guid.NewGuid().ToString();

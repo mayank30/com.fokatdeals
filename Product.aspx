@@ -1,28 +1,26 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Parent.Master" AutoEventWireup="true" CodeBehind="Product.aspx.cs" Inherits="com.fokatdeals.Product" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="cphMain" runat="server">
      <div id="first" class="item">
         <div class="row">
-            <div class="col-lg-6"><img src="http://img6a.flixcart.com/image/watch/z/e/f/a1012-01-giordano-400x400-imadxv7vdgjyfnxg.jpeg" class="prdImage"/></div>
+            <div class="col-lg-6"><img id="imageCall" src="" class="prdImage"/></div>
             <div class="col-lg-6">
-                <div class="row prdName clearfix">
-                    DKNY NY8376 Analog Watch - For Wome Category 376 Analog Watch - For Wome Category
+                <div id="name" class="row prdName clearfix">
+                    
                 </div>
                 <br />
-                <div class="row prdName clearfix">
-                    DKNY NY8376 Analog Watch - For Wome Category 376 Analog Watch - For Wome Category
+                <div id="desc" class="row prdDesc clearfix">
+                    
                 </div>
                 <br />
-                <div class="row prdPrice clearfix">
-                    100 /-
+                <div id="price" class="row prdPrice clearfix">
+                   <span id="oldPrice"></span>
                 </div>
-                <br />
-                <div class="row clearfix">
-                    <img src="images/shop Now.png" style="max-height:50px;" />
+                <div class="row buyNow clearfix">
+                    
                 </div>
-               
-                <div class="row">
-                     <p>Share this with your friends and family</p>
-                   <img src="images/icons.png" />
+               <br />
+                <div id="bottom" class="row">
+                   <img  id="social" src="../images/icons.png" />
                     <p>product saved in your recent search.</p>
                 </div>
                 
@@ -31,3 +29,92 @@
         </div>
     </div>
 </asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="cphScripts" runat="server">
+    <input type ="hidden" id="category"/>
+    <input type = "hidden" id="prdid" />
+    <script>
+        var url = "GetProductByPagination";
+        pathArray = location.href.split('/');
+        p = pathArray[4].split('-');
+
+        function getFullProduct(dataValue) {
+            var htmlCode = '';
+            var dataValue = '{'
+               + '"value" : "' + p[p.length - 1] + '"'
+            + '}';
+            $.ajax(
+                {
+
+                    type: "POST",
+                    url: resolveUrl("/service.aspx/SingleProduct"),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: dataValue,
+                    async: false,
+                    cache: false,
+                    success: function (msg) {
+                        debugger;
+                        var items = JSON.parse(msg.d);
+                        for (var i in items) {
+                            var product = items[i];
+                            debugger;
+                            $("#imageCall").attr('src', product.Img);
+                            $("#name").html(product.Name);
+                            if (product.Status == "A") {
+                                product.Status = "In Stock";
+                            }
+                            else {
+                                product.Status = "Out Of Stock";
+                            }
+                            $("#desc").html(product.Status);
+                            if (product.OfferPrice == product.RegularPrice) {
+                                $("#price").html(product.OfferPrice);
+                            }
+                            else {
+                                $("#price").prepend(product.OfferPrice);
+                                $("#oldPrice").append(product.RegularPrice);
+                            }
+                            $(".buyNow").html("<a style='cursor:pointer' onclick='showPopup(\"" + product.UniqueId + "\");' ><img src=\"../images/shop Now.png\" style=\"max-height:40px;\" /></a>");
+                        }
+                    }
+
+                    ,
+                    error: function (x, e) {
+                        alert("The call to the server side failed. " + x.responseText);
+                    }
+                }
+            );
+            
+            return $(htmlCode);
+        }
+
+        function CallMe(url) {
+            debugger;
+            $("#category").val(pathArray[3]);
+            if (localStorage.getItem("pageIndex") == null)
+            {
+                localStorage.setItem("pageIndex",1);
+            }
+            var dataValue = '{'
+                + '"index" : "' + localStorage.getItem("pageIndex") + '",'
+                + '"value" : "' + $('#category').val() + '"'
+             + '}';
+            var $items = getProduct(url, dataValue);
+            debugger;
+            $items.hide();
+            $container.append($items);
+            $items.imagesLoaded().progress(function (imgLoad, image) {
+                var $item = $(image.img).parents('.item');
+                $item.show();
+                $container.masonry('appended', $item);
+                $('#loader').hide();
+            });
+        }
+
+        $(window).load(function () {
+            localStorage.setItem("pageIndex", 1);
+            getFullProduct();
+        });
+
+    </script>
+    </asp:Content>

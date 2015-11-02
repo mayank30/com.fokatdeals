@@ -15,6 +15,7 @@ namespace com.fokatdeals
             Session[AppConstants.SESSION_UNIQUE_ID] = String.Empty;
             Session[AppConstants.SESSION_EMAIL_ID] = String.Empty;
             Session[AppConstants.SESSION_USER_TYPE] = String.Empty;
+            Session[AppConstants.SESSION_USERNAME] = String.Empty;
             Session[AppConstants.SESSION_USER_ID] = String.Empty;
             Session.RemoveAll();
 

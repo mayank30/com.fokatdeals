@@ -166,35 +166,46 @@
                         </div>
                     </li>
                     <li><a href="#"><i class="fa fa-th-large"></i>&nbsp;&nbsp;Top Brands <span class="arrow"></span></a>
-                        <div class="megamenu clearfix ">
-
-                            <div class="col-sm-4">
-                                <h3 class="title">CodeCanyon</h3>
-                                <div class="fluid-width-video-wrapper"><a href="#"><img src="images/image01.jpg" alt=""/></a> </div>
+                        <div class="megamenu" id="topBrands">
+                            <div class="col-sm-2 brandsMenu">
+                                <a href="#"><img src="images/image01.jpg" alt=""/></a>
                             </div>
-                            <div class="col-sm-4">
-                                <h3 class="title">ThemeForest</h3>
-                                <div class="fluid-width-video-wrapper"><img src="images/image02.jpg" alt=""/> </div>
+                             <div class="col-sm-2 brandsMenu">
+                                <a href="#"><img src="images/image01.jpg" alt=""/></a>
                             </div>
-                            <div class="col-sm-4">
-                                <h3 class="title">GraphicRiver </h3>
-                                <div class="fluid-width-video-wrapper"><img src="images/image03.jpg" alt=""/> </div>
+                             <div class="col-sm-2 brandsMenu">
+                                <a href="#"><img src="images/image01.jpg" alt=""/></a>
                             </div>
-
-
-                            <div class="col-sm-4">
-                                <h3 class="title mrgtop">ActiveDen</h3>
-                                <div class="fluid-width-video-wrapper"><a href="#"><img src="images/image04.jpg" alt=""/></a> </div>
+                             <div class="col-sm-2 brandsMenu">
+                                <a href="#"><img src="images/image01.jpg" alt=""/></a>
                             </div>
-                            <div class="col-sm-4">
-                                <h3 class="title mrgtop">PhotoDune</h3>
-                                <div class="fluid-width-video-wrapper"><img src="images/image05.jpg" alt=""/> </div>
+                             <div class="col-sm-2 brandsMenu">
+                                <a href="#"><img src="images/image01.jpg" alt=""/></a>
                             </div>
-                            <div class="col-sm-4">
-                                <h3 class="title mrgtop">3DOcean </h3>
-                                <div class="fluid-width-video-wrapper"><img src="images/image06.jpg" alt=""/> </div>
+                             <div class="col-sm-2 brandsMenu">
+                                <a href="#"><img src="images/image01.jpg" alt=""/></a>
                             </div>
-
+                             <div class="col-sm-2 brandsMenu">
+                                <a href="#"><img src="images/image01.jpg" alt=""/></a>
+                            </div>
+                            <div class="col-sm-2 brandsMenu">
+                                <a href="#"><img src="images/image01.jpg" alt=""/></a>
+                            </div>
+                             <div class="col-sm-2 brandsMenu">
+                                <a href="#"><img src="images/image01.jpg" alt=""/></a>
+                            </div>
+                             <div class="col-sm-2 brandsMenu">
+                                <a href="#"><img src="images/image01.jpg" alt=""/></a>
+                            </div>
+                             <div class="col-sm-2 brandsMenu">
+                                <a href="#"><img src="images/image01.jpg" alt=""/></a>
+                            </div>
+                             <div class="col-sm-2 brandsMenu">
+                                <a href="#"><img src="images/image01.jpg" alt=""/></a>
+                            </div>
+                             <div class="col-sm-2 brandsMenu">
+                                <a href="#"><img src="images/image01.jpg" alt=""/></a>
+                            </div>
                         </div>
                     </li>
                
@@ -211,7 +222,7 @@
                         </div>
                     </li>
                     <li id="signIn" runat="server">
-                        <a class="cd-signin" href="#"><i class="fa fa-sign-in"></i>&nbsp;&nbsp;Sign in</a>
+                        <a class="cd-signin"><i class="fa fa-sign-in"></i>&nbsp;&nbsp;Sign in</a>
                     </li>
                     <li id="myAccount" runat="server">
                         <a class="cd-signin" href="#"><i class="fa fa-user"></i>&nbsp;&nbsp;My Account<span class="arrow"></span></a>
@@ -234,10 +245,33 @@
 	<!-- header End -->
     <input type ="hidden" id="sessionId" runat="server"/>
     <input type ="hidden" id="sessionUser" runat="server"/>
-    <div id="generateURL" class="cd-user-modal">
-        Mayank Jhawar
-    </div>
+    <input type ="hidden" id="sessionUserId" runat="server"/>
+    <input type ="hidden" id="ipAddress" runat="server"/>
+    <input type ="hidden" id="offlineSession" runat="server"/>
+  <input type ="hidden" id="callBackPrdUrl" runat="server"/>
 
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+         <%-- <button type="button" class="close" data-dismiss="modal">&times;</button>--%>
+         <%-- <h4 class="modal-title">Invalid Header</h4>--%>
+        </div>
+        <div class="modal-body">
+          <img src="http://galeri-nasional.or.id/images/notfound.png"/>
+        </div>
+        <div class="modal-footer">
+          <a class="btn btn-default" id="goTo" href="/">Ok</a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+    
     <!-- Modal Popup for Sign in / Sign up -->
     <div id="menuPopup" class="cd-user-modal"> <!-- this is the entire modal form, including the background -->
 		<div class="cd-user-modal-container"> <!-- this is the container wrapper -->
@@ -258,8 +292,8 @@
 
 					<p class="fieldset">
 						<label class="image-replace cd-password" for="signin-password">Password</label>
-						<input class="full-width has-padding has-border" id="signin-password" type="text"  placeholder="Password">
-						<a href="#0" class="hide-password">Hide</a>
+						<input class="full-width has-padding has-border" id="signin-password" type="password"  placeholder="Password">
+						<a href="#0" class="hide-password">Show</a>
 						<span class="cd-error-message">Error message here!</span>
 					</p>
 
@@ -292,9 +326,8 @@
 					</p>
 
 					<p class="fieldset">
-						<label class="image-replace cd-password" for="signup-password">Password</label>
-						<input class="full-width has-padding has-border" id="signup-password" type="text"  placeholder="Password">
-						<a href="#0" class="hide-password">Hide</a>
+						<label class="image-replace cd-password" for="signup-password">Phone</label>
+						<input class="full-width has-padding has-border" id="signup-password" type="text"  placeholder="Phone">
 						<span class="cd-error-message">Error message here!</span>
 					</p>
 
@@ -336,7 +369,7 @@
 
     
         <div id="container">
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        <asp:ContentPlaceHolder ID="cphMain" runat="server">
         
         </asp:ContentPlaceHolder>
 	    </div>
@@ -456,6 +489,10 @@
     
     <script type="text/javascript" src='<%=ResolveUrl("js/custom.js")%>'></script>
     <script src='<%=ResolveUrl("js/main.js")%>'></script>
+    <script src='<%=ResolveUrl("js/caller.js")%>'></script>
+    <asp:ContentPlaceHolder ID="cphScripts" runat="server">
+          <script src='<%=ResolveUrl("js/customCalls.js")%>'></script>
+    </asp:ContentPlaceHolder>
 <!-- java Script Section End -->
 
 

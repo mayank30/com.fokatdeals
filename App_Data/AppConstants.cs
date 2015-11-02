@@ -7,6 +7,8 @@ namespace com.fokatdeals
 {
     public class AppConstants
     {
+        public static int PRODUCT_PAGE_SIZE = 30;
+
         public static String[] EMAIL_REQUIRED_BCC = new string[] { "mayankjhawar18@gmail.com" };
         public static String[] EMAIL_REQUIRED_CC = new string[] { "fokatd@gmail.com" };
         public static String HOME_PAGE = "WebForm2.aspx";
@@ -28,7 +30,8 @@ namespace com.fokatdeals
         //public static String UNIQUE_ID = System.Guid.NewGuid().ToString();
         //public static String GENERATED_PASSWORD = UNIQUE_ID.Replace("-","").Substring(0, 8); 
 
-        public static String SESSION_USER_ID = "34hhjkhasd";
+        public static String SESSION_USER_ID = "IDUserID";
+        public static String SESSION_USERNAME = "34hhjkhasd";
         public static String SESSION_UNIQUE_ID = "jkashdhk1334jk";
         public static String SESSION_EMAIL_ID = "asda@sdf.com";
         public static String SESSION_USER_TYPE = "g3jkd";
@@ -61,6 +64,9 @@ namespace com.fokatdeals
         RegisterSuccess=201,
 
         ChangePasswordError=300,
-        ChangePasswordSuccess=301
+        ChangePasswordSuccess=301,
+
+        CategoryError = 400,
+        CategorySuccess = 401
     }
 }

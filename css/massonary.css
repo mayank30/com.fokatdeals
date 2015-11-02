@@ -1,47 +1,143 @@
-       #container {
-           width: 1200px;
-           margin:0px;
-           padding-top:0px;
-           margin:auto;
+#container {
+    width: 1200px;
+    margin: 0px;
+    padding-top: 0px;
+    margin: auto;
+}
 
-        }
+.pin {
+    font-size: x-large;
+    color: rgba(0, 0, 0, 0.18);
+    float: right;
+    margin-top: -5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
 
-        .item {
-            display: inline-block;
-            background: #fff;
-            margin-bottom:10px;
-            width: 290px;
-            box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.18);
-            border-radius: 3px;
-            -moz-border-radius: 3px;
-            -webkit-border-radius: 3px;
-            font-size:12px;
-            color:#808080;
-            padding:10px;
-        }
-        .item a {
-            /*color:rgba(0, 0, 0, 0.60);*/
-            text-decoration:none;
-        }
-        .item p{
-            margin : 5px;
-        }
+    .pin:hover {
+        color: #808080;
+    }
+
+.item {
+    display: inline-block;
+    background: #fff;
+    margin-bottom: 10px;
+    width: 290px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.18);
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    font-size: 10px;
+    color: #bebebe;
+    padding: 10px;
+}
+
+
+
+    .item a {
+        color: #808080;
+        text-decoration: none;
+        font-style: italic;
+    }
+
+    .item p {
+        margin: 0px;
+    }
+
+    .item a p {
+        margin-top: 5px;
+    }
 
     .item .prd {
         display: block;
         margin-left: auto;
         margin-right: auto;
-	    z-index:0;
-        max-width:100%;
-        max-height:300px;
+        z-index: 0;
+        max-width: 100%;
+        max-height: 280px;
+    }
+
+.menu {
+    background-color: #808080;
+    color: white;
+}
+
+    .menu a {
+        color: white;
+        font-style: normal;
+    }
+
+    .menu h4 {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .menu a:hover {
+        color: white;
     }
 
 #headerTitle {
-color: grey;
+    color: grey;
     margin-top: 80px;
     font-size: x-large;
     margin-left: 5%;
-    margin-bottom: 20px;}
+    margin-bottom: 20px;
+}
+
+
+#first {
+    width: 590px;
+    height: 350px;
+    background: #fff;
+    padding: 20px;
+    color: #808080;
+    text-align:center;
+}
+
+    #first .prdImage {
+        max-height: 320px;
+        max-width: 250px;
+        margin-left: 0px;
+    }
+
+.prdName {
+    font-size: 16px;
+    height:30px;
+    margin-bottom:20px;
+}
+.prdDesc
+{
+    font-size: 12px;
+    height:30px;
+}
+.prdPrice {
+    text-align:center;
+    padding-top:-20px;
+    font-size: 36px;
+    padding: 20px;
+    color: #ef4444;
+}
+
+.buyNow {
+text-align:center;
+}
+
+#oldPrice {
+     font-size: 18px;
+    padding-left:10px;
+    text-decoration:line-through;
+    color: #808080;
+}
+
+#social {
+margin-top:0px;
+
+}
+
+#bottom {
+    vertical-align:bottom;
+}

@@ -49,6 +49,11 @@ namespace com.fokatdeals
         private void URLMapping(RouteCollection routes)
         {
             routes.MapPageRoute(
+               "all-brands",
+               "all/top/brands/",
+               "~/AllBrand.aspx"
+           );
+            routes.MapPageRoute(
                 "Brand",
                 "{brandName}/",
                 "~/Brand.aspx"
@@ -68,6 +73,7 @@ namespace com.fokatdeals
                 "",
                 "~/Default.aspx"
             );
+           
 
         }
     }

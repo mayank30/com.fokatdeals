@@ -1,11 +1,11 @@
 
 a {
-  color: #E17467;
+  color: #DD4D3B ;
   text-decoration: none;
 }
 
 a:hover {
-  color: #E17467;
+  color: #DD4D3B ;
   text-decoration: none;
 }
 
@@ -333,25 +333,3 @@ xsigin/signup popup
   display: block;
 }
 
-
-#first {
-            width:590px;
-            height:400px;
-            background:#fff;
-            padding:20px;
-            color:#d2d2d2;
-        }
-            #first .prdImage {
-            
-                max-height:360px;
-                margin-left:30px;
-            }
-     
-        .prdName {
-            font-size:14px;
-        }
-        .prdPrice {
-            font-size:36px;
-            padding:20px;
-            color: #ef4444;
-        }

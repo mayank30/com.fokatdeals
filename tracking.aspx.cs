@@ -13,7 +13,7 @@ namespace com.fokatdeals
         {
             if (Session[AppConstants.SESSION_UNIQUE_ID] != null)
             {
-                Response.Write(Session[AppConstants.SESSION_UNIQUE_ID].ToString()+"  *****  "+Session[AppConstants.SESSION_USER_ID].ToString());
+                Response.Write(Session[AppConstants.SESSION_UNIQUE_ID].ToString()+"  *****  "+Session[AppConstants.SESSION_USERNAME].ToString());
             }
             else
             {

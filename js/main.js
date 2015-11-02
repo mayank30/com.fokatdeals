@@ -1,7 +1,30 @@
 
 jQuery(document).ready(function ($) {
+    //localStorage.name = "WishList";
+    //$(document).on('click', '.pin', function (event) {
+    //    event.preventDefault();
+    //    debugger;
+    //    $msg = "<p>Please login if you would like to add this product to wishlist.</p>";
+    //    if (showPopup(this.id,$msg,"no")) {
+    //        if ($(this).find('.fa-heart').length == 0) {
+    //            //already added to 
+    //            $(this).html('<i class="fa fa-heart"></i>');
+    //            localStorage.setItem(this.id, '<i class="fa fa-heart"></i>');
+    //            updateWishList(this.id);
+    //        }
+    //        else {
+    //            //need to add into user wishlist
+    //            $(this).html('<i class="fa fa-heart-o"></i>');
+    //            localStorage.removeItem(this.id);
+    //            removeWishList(this.id);
+    //        }
+    //        return false;
+    //    }
+    //    else {
 
-    
+    //    }
+    //    //alert($("#ipAddress").val());
+    //});
 	//open modal
 	$main_nav.on('click', function(event){
 
@@ -24,7 +47,7 @@ jQuery(document).ready(function ($) {
 	//close modal
 	$('#menuPopup').on('click', function (event) {
 		if( $(event.target).is($form_modal) || $(event.target).is('.cd-close-form') ) {
-			$form_modal.removeClass('is-visible');
+		    $form_modal.removeClass('is-visible');
 		}	
 	});
 	//close modal when clicking the esc keyboard button
@@ -144,32 +167,34 @@ jQuery.fn.putCursorAtEnd = function() {
 	});
 };
 
+//function updateWishListFromStorage()
+//{
+//    if (sessionId.val() != '')
+//    {
+//        for (i = 0; i < localStorage.length; i++)
+//        {
+//            var prdid = localStorage.key(i);
+//            updateWishList(prdid);
+//        }
+//    }
+//}
 
-var url = "SampleTest";
+function updateWishList(prdid)
+{
+    var obj = '{'
+           + '"prdid"  : "' + prdid + '"'
+          + '}';
+    //localStorage.getItem(localStorage.key(i));
+    serverCallAddToWishList(obj);
+}
 
-$(window).load(function () {
-    updateHeader();
-    CallMe(url);
-    debugger;
-    if (sessionId.val() != "") {
-
-        myAccountMenu.show();
-        signInMenu.hide();
-    }
-    else {
-        myAccountMenu.hide();
-        signInMenu.show();
-    }
-  
-});
-$(window).scroll(function () {
-    debugger;
-
-    if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.9) {
-        CallMe(url);
-
-    }
-});
+function removeWishList(prdid) {
+    var obj = '{'
+           + '"prdid"  : "' + prdid + '"'
+          + '}';
+    //localStorage.getItem(localStorage.key(i));
+    serverCallRemoveToWishList(obj);
+}
 
 function updateHeader() {
     pathArray = location.href.split('/');

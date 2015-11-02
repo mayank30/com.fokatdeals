@@ -46,14 +46,14 @@ namespace com.fokatdeals
             }
         }
 
-        public DataTable GetProductByPagination(int pageIndx,int size,out int nextndx)
+        public DataTable GetProductByPagination(int pageIndx,int size,String value)
         {
             try
             {
                 SqlCommand cmd = new SqlCommand("USP_GetProductsByPagination", con);
                 cmd.Parameters.AddWithValue("@indx", pageIndx);
                 cmd.Parameters.AddWithValue("@size", size);
-                nextndx = pageIndx + size + 1;
+                cmd.Parameters.AddWithValue("@value", value);
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -62,10 +62,91 @@ namespace com.fokatdeals
             }
             catch
             {
-                nextndx = 50;
                 return null;
             }
         }
+
+        #region "WishList"
+        public int InsertWishList(String prdid, String userid)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("usp_InsertWishList", con);
+                cmd.Parameters.AddWithValue("@prdid", prdid);
+                cmd.Parameters.AddWithValue("@userid", userid);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                int i = cmd.ExecuteNonQuery();
+                con.Close();
+                return i;
+            }
+            catch
+            {
+                return -99;
+            }
+        }
+
+        public int DeleteWishList(String prdid, String userid)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("usp_DeleteWishList", con);
+                cmd.Parameters.AddWithValue("@prdid", prdid);
+                cmd.Parameters.AddWithValue("@userid", userid);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                int i = cmd.ExecuteNonQuery();
+                con.Close();
+                return i;
+            }
+            catch
+            {
+                return -99;
+            }
+        }
+
+        public DataTable GetUserWishList(String prdid, String userid)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("usp_GetWishList", con);
+                cmd.Parameters.AddWithValue("@prdid", prdid);
+                cmd.Parameters.AddWithValue("@userid", userid);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        #endregion
+
+
+        #region "Product Category"
+
+        public DataTable GetBaseCategory()
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("select * from [dbo].[tbl_Category]", con);
+                cmd.CommandType = CommandType.Text;
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        #endregion
 
         public int UpdateProductImageData(String prdid,String imageUrl,String width,String height)
         {
@@ -101,6 +182,41 @@ namespace com.fokatdeals
             }
             return result;
         }
+
+        public int InsertProducts(ProductModel prdModel)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("usp_InsertProduct", con);
+                cmd.Parameters.AddWithValue("@uniquId", prdModel.UniqueId);
+                cmd.Parameters.AddWithValue("@prdid", prdModel.PrdId);
+                cmd.Parameters.AddWithValue("@name", prdModel.Name);
+                cmd.Parameters.AddWithValue("@desc", prdModel.Description);
+                cmd.Parameters.AddWithValue("@prdUrl", prdModel.PrdUrl);
+                cmd.Parameters.AddWithValue("@prdre", prdModel.PrdRedirectUrl);
+                cmd.Parameters.AddWithValue("@img", prdModel.Img);
+                cmd.Parameters.AddWithValue("@w", prdModel.Width);
+                cmd.Parameters.AddWithValue("@h", prdModel.Height);
+                cmd.Parameters.AddWithValue("@storeid", prdModel.Storeid);
+                cmd.Parameters.AddWithValue("@reg", prdModel.RegularPrice);
+                cmd.Parameters.AddWithValue("@sell", prdModel.OfferPrice);
+                cmd.Parameters.AddWithValue("@catid", prdModel.SubCatId);
+                cmd.Parameters.AddWithValue("@status", prdModel.Status);
+                cmd.Parameters.AddWithValue("@c1", prdModel.Custom1);
+                cmd.Parameters.AddWithValue("@c2", prdModel.Custom2);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                int i = cmd.ExecuteNonQuery();
+                con.Close();
+                return i;
+            }
+            catch
+            {
+                return -99;
+            }
+        }
+
 
     }
 }

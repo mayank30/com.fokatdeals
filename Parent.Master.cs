@@ -13,20 +13,25 @@ namespace com.fokatdeals
         {
             try
             {
+                ipAddress.Value = new CommonDAL().GetIPAddress();
+                offlineSession.Value = new CommonModel().UniqueId();
                 if (Session[AppConstants.SESSION_UNIQUE_ID] != null)
                 {
                     sessionId.Value = Session[AppConstants.SESSION_UNIQUE_ID].ToString() ;
-                    sessionUser.Value = Session[AppConstants.SESSION_USER_ID].ToString();
+                    offlineSession.Value = sessionId.Value;
+                    sessionUser.Value = Session[AppConstants.SESSION_USERNAME].ToString();
+                    sessionUserId.Value = Session[AppConstants.SESSION_USER_ID].ToString();
                 }
                 else 
                 {
                     sessionId.Value = "";
                     sessionUser.Value = "";
+                    sessionUserId.Value = "";
                 }
             }
             catch
             {
- 
+                Response.Redirect("sdfsdfsdf");
             }
         }
     }
