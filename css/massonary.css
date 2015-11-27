@@ -7,7 +7,7 @@
 
 .pin {
     font-size: x-large;
-    color: rgba(0, 0, 0, 0.18);
+    color: #24A270;
     float: right;
     margin-top: -5px;
     margin-right: 5px;
@@ -15,7 +15,20 @@
 }
 
     .pin:hover {
-        color: #808080;
+        color: #EB4435;
+    }
+
+.wish {
+    font-size: x-large;
+    color: #EB4435;
+    float: right;
+    margin-top: -5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+    .wish:hover {
+        color: #EB4435;
     }
 
 .item {
@@ -58,15 +71,89 @@
         z-index: 0;
         max-width: 100%;
         max-height: 280px;
+        padding: 25px;
     }
 
+/*Coupon In Items for Coupon Page*/
+.coupon {
+    display: inline-block;
+    background: #fff;
+    margin-bottom: 10px;
+    width: 290px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.18);
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    font-size: 10px;
+    color: #bebebe;
+    padding: 10px;
+    text-align: center;
+}
+
+    .coupon img {
+        height: 35px;
+        margin-bottom: 20px;
+    }
+
+    .coupon .code {
+        height: 35px;
+        width: 90%;
+        margin-left: 15px;
+        text-align: center;
+        font-size: 15px;
+        padding-top: 8px;
+        border: 1px dashed #EB4334;
+        margin-bottom: 20px;
+        color: #EB4334;
+        text-transform: uppercase;
+    }
+
+        .coupon .code .fa-scissors {
+            float: left;
+            margin-left: 20px;
+        }
+
+        .coupon .code span {
+            margin-left: -20px;
+            margin-right: 30px;
+        }
+
+    .coupon .couponBtm {
+        float: left;
+        text-align: justify;
+        color: #808080;
+        border-bottom:1px solid #ececec;
+        margin-bottom:5px;
+    }
+.status {
+
+ color: #EB4334;
+ float:left;
+     font-size: small;
+     margin-left:20px;
+     margin-top:10px;
+ text-transform: uppercase;
+}
+.couponPin {
+    font-size: x-large;
+    color: #24A270;
+    float: right;
+    margin-right: 20px;
+    cursor: pointer;
+         margin-top:10px;
+    margin-left: 10px;
+}
+
 .menu {
-    background-color: #808080;
-    color: white;
+    background-color: #fff;
+    color: #808080;
 }
 
     .menu a {
-        color: white;
+        color: #808080;
         font-style: normal;
     }
 
@@ -77,12 +164,12 @@
     }
 
     .menu a:hover {
-        color: white;
+        color: #808080;
     }
 
 #headerTitle {
     color: grey;
-    margin-top: 80px;
+    margin-top: 70px;
     font-size: x-large;
     margin-left: 5%;
     margin-bottom: 20px;
@@ -95,49 +182,65 @@
     background: #fff;
     padding: 20px;
     color: #808080;
-    text-align:center;
+    text-align: center;
 }
 
     #first .prdImage {
-        max-height: 320px;
+        max-height: 280px;
         max-width: 250px;
-        margin-left: 0px;
     }
+
+.imageHolder {
+    vertical-align: middle;
+    position: relative;
+}
 
 .prdName {
     font-size: 16px;
-    height:30px;
-    margin-bottom:20px;
+    height: 30px;
+    margin-bottom: 20px;
 }
-.prdDesc
-{
+
+.prdDesc {
     font-size: 12px;
-    height:30px;
+    height: 30px;
 }
+
 .prdPrice {
-    text-align:center;
-    padding-top:-20px;
-    font-size: 36px;
+    text-align: center;
+    padding-top: -20px;
+    font-size: 32px;
     padding: 20px;
     color: #ef4444;
 }
 
 .buyNow {
-text-align:center;
+    text-align: center;
 }
 
 #oldPrice {
-     font-size: 18px;
-    padding-left:10px;
-    text-decoration:line-through;
+    font-size: 18px;
+    padding-left: 10px;
+    text-decoration: line-through;
     color: #808080;
 }
 
 #social {
-margin-top:0px;
+    margin-top: 0px;
+}
 
+#storeid {
+    font-size: 20px;
+    color: #EA4334;
+    margin-bottom: 20px;
 }
 
 #bottom {
-    vertical-align:bottom;
+    vertical-align: bottom;
 }
+
+    #bottom img {
+        width: 50px;
+        height: 50px;
+        padding: 10px;
+    }

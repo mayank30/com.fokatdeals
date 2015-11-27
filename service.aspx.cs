@@ -50,6 +50,15 @@ namespace com.fokatdeals
             return getProductJsonIncludePage(dt,index);
         }
 
+        [WebMethod]
+        public static String SearchProductByPagination(int index, String value)
+        {
+            DataTable dt = new DataTable();
+            ProductDAL dal = new ProductDAL();
+            dt = dal.SearchProductByPagination(index, AppConstants.PRODUCT_PAGE_SIZE, value);
+            return getProductJsonIncludePage(dt, index);
+        }
+
         private static String getProductJsonIncludePage(DataTable dt,int index)
         {
             if (dt != null)
@@ -85,62 +94,7 @@ namespace com.fokatdeals
 
         #endregion
 
-        [WebMethod]
-        public static String DisplayProduct(String value)
-        {
-            String domain = Properties.Settings.Default.Domain;
-            String productString = "";
-            DataTable dt = new DataTable();
-            ProductDAL dal = new ProductDAL();
-            dt = dal.GetProduct(value);
-            if (dt.Rows.Count > 0)
-            {
-                int j = 50;
-                if (dt.Rows.Count < j)
-                {
-                    j = dt.Rows.Count;
-                }
-                for (int i = 0; i < j; i++)
-                {
-                    string img = dt.Rows[i]["imageurl"].ToString();
-                    productString = productString + "<div class='grid cs-style-3'>";
-                    productString = productString + "<figure><div class='imgholder'><a href=" + domain + dt.Rows[i]["subcatid"] + "/" + dt.Rows[i]["seourl"] + " title = '" + dt.Rows[i]["name"] + " more info..'><img src='" + img + "' onerror=\"imgError(this);\"  alt= 'FokatDeals.com' /></a></div>";
-                    productString = productString + "<strong><a href=" + domain + dt.Rows[i]["subcatid"] + "/" + dt.Rows[i]["seourl"] + ">" + dt.Rows[i]["name"] + "</a></strong>";
-                    productString = productString + "<p><a href = " + domain + dt.Rows[i]["subcatid"] + ">in " + dt.Rows[i]["catName"] + "</a></p>";
-                    productString = productString + "<div class='meta'>by <a href=" + domain + "!/" + dt.Rows[i]["storeid"] + ">" + dt.Rows[i]["storeid"] + "</a></div>";
-                    productString = productString + "<figcaption><a href=" + dt.Rows[i]["prdRedirectUrl"] + " target = '_blank'>" + dt.Rows[i]["offer"] + "</a></figcaption></figure></div>";
-                }
-            }
-            return productString;
-        }
-
-
-        [WebMethod]
-        public string[] SearchData(string search)
-        {
-            List<string> result = new List<string>();
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
-            {
-                using (SqlCommand cmd = new SqlCommand("Select distinct top(50) '<a href=/'+subCatid+'/'+seourl+'><div>'+substring(name,0,40)+'.. at '+offerprice+'</div><div> in <b>'+subcatid+'</b> by <i>'+storeid+'</i></div></a>' as html,name from tbl_Products where name like '%'+@SearchText+'%'", con))
-                {
-                    con.Open();
-                    cmd.Parameters.AddWithValue("@SearchText", search);
-                    SqlDataReader dr = cmd.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        result.Add(string.Format("{0}~{1}", dr["html"], dr["name"]));
-                    }
-                    return result.ToArray();
-                }
-            }
-        }
-
-        [WebMethod]
-        public static string TopCategories()
-        {
-            return "<div class = 'grid' style='width:310px;height:310px; padding:0px; color:#ffffff;background:#A8A3A3; font-size:14px;'><b class='pull-left'>Top Categories</b><div class='col-md-12 column' id='cat'><div class='col-md-4 column'><div class='row'><a href='brands'>Brands</a></div><div class='row'><a href='flower-n-gifting-ideas'>Flower & Gifts</a></div><div class='row'><a href='books-and-staitionary'>Books & Staitionary</a></div><div class='row'><a href='health-and-beauty'>Health & Beauty</a></div><div class='row'><a href='mobile-and-accessories'>Mobile & Tablets</a></div><div class='row'><a href='kids-and-baby-store'>Kids & Baby</a></div></div><div class='col-md-4 column'><div class='row'><a href='sports-and-fitness'>Sports & Fitness</a></div><div class='row'><a href='clothings'>Clothing</a></div><div class='row'><a href='camera-and-accessories'>Cameras & Accessories</a></div><div class='row'><a href='household-appliance'>Household Appliance</a></div><div class='row'><a href='footwears-fashion-for-means-womens'>Footwears</a></div><div class='row'><a href='jewellery-gold-sliver-daimonds'>Jewellery</a></div></div><div class='col-md-4 column'><div class='row'><a href='computer-and-laptops'>Computers & Laptops</a></div><div class='row'><a href='home-kitchen-decor'>Home & Kitchen Decor</a></div><div class='row'><a href='fashion-accessories'>Fashion Accessories</a></div><div class='row'><a href='travels-and-hotels'>Travels & Hotels</a></div><div class='row'><a href='electronics'>Electronics</a></div><div class='row'><a href='food-products'>Food Products</a></div></div></div></div>";
-        }
-
+     
         #region "User Account Related"
 
         [System.Web.Services.WebMethod(EnableSession = true)]
@@ -313,51 +267,25 @@ namespace com.fokatdeals
             return "";
         }
 
-
         [WebMethod]
-        public static String GetUserWishList(String prdid)
+        public static String GetUserWishList(int index)
         {
-            WishList obj = new WishList();
             DataTable dt = new DataTable();
             ProductDAL dal = new ProductDAL();
-            List<WishList> details = new List<WishList>();
-            dt = dal.GetUserWishList(prdid, HttpContext.Current.Session[AppConstants.SESSION_USER_ID].ToString());
-            if (dt != null)
-            {
-                foreach (DataRow dtrow in dt.Rows)
-                {
-                    
-                    obj.id = dtrow["id"].ToString();
-                    obj.userid = dtrow["userid"].ToString();
-                    obj.prdid = dtrow["prdid"].ToString();
-                    obj.code = dtrow["code"].ToString();
-                    obj.createdDate = dtrow["createdDate"].ToString();
-                    obj.errorCode = 10001;
-                    obj.errorMessage = "Successfully Retrival";
-                    details.Add(obj);
-                }
-
-                
-            }
-            else
-            {
-                obj.errorCode = 10001;
-                obj.errorMessage = "Successfully Retrival";
-            }
-            JavaScriptSerializer ser = new JavaScriptSerializer();
-            return ser.Serialize(details);
+            dt = dal.GetUserWishList(index, AppConstants.PRODUCT_PAGE_SIZE, HttpContext.Current.Session[AppConstants.SESSION_USER_ID].ToString());
+            return getProductJsonIncludePage(dt, index);
         }
         #endregion
 
 
         [WebMethod]
-        public static String GetBaseCategory()
+        public static String GetBaseCategory(String isAll)
         {
             CategoryModel obj = new CategoryModel();
             DataTable dt = new DataTable();
             ProductDAL dal = new ProductDAL();
             List<CategoryModel> details = new List<CategoryModel>();
-            dt = dal.GetBaseCategory();
+            dt = dal.GetBaseCategory(isAll,"A");
             if (dt != null)
             {
                 foreach (DataRow dtrow in dt.Rows)
@@ -367,8 +295,10 @@ namespace com.fokatdeals
                     obj.CatName = dtrow["catname"].ToString();
                     obj.Status = dtrow["catstatus"].ToString();
                     obj.CatHotStatus = dtrow["cathotstatus"].ToString();
+                    obj.CatImages = dtrow["catimage"].ToString();
                     obj.CatAlias = dtrow["categoryAlias"].ToString();
-                    obj.CatUrl = Properties.Settings.Default.Domain + "/!/" + dtrow["categoryAlias"].ToString();
+                    obj.CatDesc = dtrow["catdesc"].ToString();
+                    obj.CatUrl = Properties.Settings.Default.Domain + "/!/top/" + dtrow["categoryAlias"].ToString();
                     obj.errorCode = (int) Errors.CategorySuccess;
                     obj.errorMessage = "Successfully Retrival";
                     details.Add(obj);
@@ -384,6 +314,46 @@ namespace com.fokatdeals
             JavaScriptSerializer ser = new JavaScriptSerializer();
             return ser.Serialize(details);
         }
+
+        [WebMethod]
+        public static String GetSubCategory(String baseCategory)
+        {
+            SubCategoryModel obj = new SubCategoryModel();
+            DataTable dt = new DataTable();
+            ProductDAL dal = new ProductDAL();
+            List<SubCategoryModel> details = new List<SubCategoryModel>();
+            dt = dal.GetChildCategory(baseCategory);
+            if (dt != null)
+            {
+                foreach (DataRow dtrow in dt.Rows)
+                {
+                    obj = new SubCategoryModel();
+                    obj.CatId = dtrow["subcatid"].ToString();
+                    obj.CatName = dtrow["subcatname"].ToString();
+                    obj.CatDesc = dtrow["subcatdesc"].ToString();
+                    obj.CatImages = dtrow["subcatimage"].ToString();
+                    obj.CatTagList = dtrow["subcattaglist"].ToString();
+                    obj.Status = dtrow["subcatstatus"].ToString();
+                    obj.CatHotStatus = dtrow["subcathotstatus"].ToString();
+                    obj.CatAlias = dtrow["scatAlias"].ToString();
+                    obj.ParentCatId = dtrow["catid"].ToString();
+                    obj.CatUrl = Properties.Settings.Default.Domain + "/!/" + dtrow["scatAlias"].ToString();
+                    obj.errorCode = (int)Errors.CategorySuccess;
+                    obj.errorMessage = "Successfully Retrival";
+                    details.Add(obj);
+                }
+
+
+            }
+            else
+            {
+                obj.errorCode = (int)Errors.CategoryError;
+                obj.errorMessage = "Error while Retrival";
+            }
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            return ser.Serialize(details);
+        }
+
 
         #region "Affiliated Store"
         [WebMethod]
@@ -424,6 +394,53 @@ namespace com.fokatdeals
         }
 
         #endregion
+
+        #region "Coupon Details"
+
+        [WebMethod]
+        public static String GetCoupon(int index,String value)
+        {
+            CouponModel obj = new CouponModel();
+            DataTable dt = new DataTable();
+            CouponDAL dal = new CouponDAL();
+            List<CouponModel> details = new List<CouponModel>();
+            dt = dal.GetCoupons(index, AppConstants.PRODUCT_PAGE_SIZE,value);
+            if (dt != null)
+            {
+                foreach (DataRow dtrow in dt.Rows)
+                {
+                    obj = new CouponModel();
+                    obj.VoucherCodeId = dtrow["VoucherCodeId"].ToString();
+                    obj.Code = dtrow["Code"].ToString();
+                    obj.Description = dtrow["Description"].ToString();
+                    obj.Title = dtrow["Title"].ToString();
+                    obj.Description = dtrow["Description"].ToString();
+                    obj.ActivationDate = dtrow["ActivationDate"].ToString();
+                    obj.ExpiryDate = dtrow["ExpiryDate"].ToString();
+                    obj.TrackingUrl = dtrow["TrackingUrl"].ToString();
+                    obj.CategoryName = dtrow["CategoryName"].ToString();
+                    obj.Status = dtrow["Status"].ToString();
+                    obj.Addedon = dtrow["Addedon"].ToString();
+                    obj.Merchant = dtrow["Merchant"].ToString();
+                    obj.Product = dtrow["Product"].ToString();
+                    obj.errorCode = (int)Errors.CategorySuccess;
+                    obj.errorMessage = "Successfully Retrival";
+                    details.Add(obj);
+                }
+
+
+            }
+            else
+            {
+                obj.errorCode = (int)Errors.CategoryError;
+                obj.errorMessage = "Error while Retrival";
+            }
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            return ser.Serialize(details);
+        }
+
+
+        #endregion 
 
     }
 

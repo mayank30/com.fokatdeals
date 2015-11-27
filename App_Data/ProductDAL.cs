@@ -10,7 +10,8 @@ namespace com.fokatdeals
 {
     public class ProductDAL : CommonDAL
     {
-        
+
+        #region "Fetch Product Data "
         public DataTable GetRandomProduct()
         {
             try
@@ -66,6 +67,28 @@ namespace com.fokatdeals
             }
         }
 
+        public DataTable SearchProductByPagination(int pageIndx, int size, String value)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("USP_SearchProductsByPagination", con);
+                cmd.Parameters.AddWithValue("@indx", pageIndx);
+                cmd.Parameters.AddWithValue("@size", size);
+                cmd.Parameters.AddWithValue("@value", value);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        #endregion
+
         #region "WishList"
         public int InsertWishList(String prdid, String userid)
         {
@@ -105,13 +128,14 @@ namespace com.fokatdeals
             }
         }
 
-        public DataTable GetUserWishList(String prdid, String userid)
+        public DataTable GetUserWishList(int pageIndx, int size, String value)
         {
             try
             {
                 SqlCommand cmd = new SqlCommand("usp_GetWishList", con);
-                cmd.Parameters.AddWithValue("@prdid", prdid);
-                cmd.Parameters.AddWithValue("@userid", userid);
+                cmd.Parameters.AddWithValue("@indx", pageIndx);
+                cmd.Parameters.AddWithValue("@size", size);
+                cmd.Parameters.AddWithValue("@value", value);
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -129,12 +153,32 @@ namespace com.fokatdeals
 
         #region "Product Category"
 
-        public DataTable GetBaseCategory()
+        public DataTable GetBaseCategory(String isDisplayAll, String status)
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("select * from [dbo].[tbl_Category]", con);
-                cmd.CommandType = CommandType.Text;
+                SqlCommand cmd = new SqlCommand("usp_GETCATEGORY", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@isAll", isDisplayAll);
+                cmd.Parameters.AddWithValue("@status", status);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public DataTable GetChildCategory(String category)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("usp_GetSubCategory", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@catid", category);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);

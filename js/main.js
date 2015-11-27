@@ -178,6 +178,13 @@ jQuery.fn.putCursorAtEnd = function() {
 //        }
 //    }
 //}
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
 
 function updateWishList(prdid)
 {
@@ -196,20 +203,36 @@ function removeWishList(prdid) {
     serverCallRemoveToWishList(obj);
 }
 
-function updateHeader() {
-    pathArray = location.href.split('/');
-    //o,1,2,3
-    i = pathArray.length - 1;
-    if (i == 3) {
-        $("#headerTitle").append(pathArray[i].capitalizeFirstLetter());
-    }
-    else if (i == 4) {
-        if (pathArray[3] == "!") {
-            $("#headerTitle").append(pathArray[4].capitalizeFirstLetter());
-        } else {
-            catTitle = '<a href=' + resolveUrl("/!/" + pathArray[3]) + '>' + pathArray[3].capitalizeFirstLetter() + '</a>'
-            $("#headerTitle").append(catTitle + " / " + pathArray[4].substring(0, 35).capitalizeFirstLetter() + "...");
+function updateHeader(text) {
+    if (text == undefined) {
+        pathArray = location.href.split('/');
+        i = pathArray.length - 1;
+        if (i == 3) {
+            if (pathArray[3].split("=")[0] == "Search.aspx?s") {
+                $("#headerTitle").append(pathArray[3].split("=")[1].capitalizeFirstLetter().replace("%20"," ").replace("+"," "));
+            }
+            else {
+                $("#headerTitle").append(pathArray[i].capitalizeFirstLetter());
+            }
         }
+        else if (i >= 4) {
+            if (pathArray[3] == "!") {
+                if (pathArray[4] == "top") {
+                    var txt = pathArray[5].capitalizeFirstLetter();
+                    $("#headerTitle").append(txt);
+                }
+                else {
+                    $("#headerTitle").append(pathArray[4].capitalizeFirstLetter());
+                }
+            } else {
+                catTitle = '<a href=' + resolveUrl("/!/" + pathArray[3]) + '>' + pathArray[3].capitalizeFirstLetter() + '</a>'
+                $("#headerTitle").append(catTitle + " / " + pathArray[4].substring(0, 35).capitalizeFirstLetter() + "...");
+            }
+        }
+        // alert(i);
     }
-   // alert(i);
+    else {
+        debugger;
+        $("#headerTitle").html('<a href=' + resolveUrl("") + '>' + text + '</a>');
+    }
 }

@@ -49,6 +49,21 @@ namespace com.fokatdeals
         private void URLMapping(RouteCollection routes)
         {
             routes.MapPageRoute(
+             "coupon",
+             "all/brand/free/coupon",
+             "~/Coupon.aspx"
+         );
+            routes.MapPageRoute(
+               "dashboard",
+               "all/user/{dashbaord}",
+               "~/Dashboard.aspx"
+           );
+            routes.MapPageRoute(
+              "WishList",
+              "all/user/wishlist/product",
+              "~/WishList.aspx"
+          );
+            routes.MapPageRoute(
                "all-brands",
                "all/top/brands/",
                "~/AllBrand.aspx"
@@ -62,6 +77,11 @@ namespace com.fokatdeals
                 "Category",
                 "!/{categoryName}/",
                 "~/Category.aspx"
+            );
+            routes.MapPageRoute(
+                "BaseCategory",
+                "!/top/{categoryName}/",
+                "~/BaseCategory.aspx"
             );
             routes.MapPageRoute(
                 "Product",

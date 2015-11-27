@@ -101,6 +101,35 @@ namespace com.fokatdeals
             }
         }
 
+        #region "Tracking"
+        public int InsertTracking(TrackingModel user)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("USP_INSERTTRACKING", con);
+                cmd.Parameters.AddWithValue("@userid", user.userid);
+                cmd.Parameters.AddWithValue("@prdid", user.prdid);
+                cmd.Parameters.AddWithValue("@sessionid", user.sessionid);
+                cmd.Parameters.AddWithValue("@brand", user.brand);
+                cmd.Parameters.AddWithValue("@status", user.status);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                int ret = cmd.ExecuteNonQuery();
+                con.Close();
+                return ret;
+            }
+            catch
+            {
+                return -99;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        #endregion
+
+
         public int UpdateProductImageData(String prdid,String imageUrl,String width,String height)
         {
             try

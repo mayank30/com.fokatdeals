@@ -71,6 +71,123 @@
     <Content Include="bootstrap\fonts\glyphicons-halflings-regular.html" />
     <Content Include="bootstrap\fonts\glyphicons-halflings-regulard41d.html" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
+    <Content Include="catIcons\Add Tag.png" />
+    <Content Include="catIcons\Airport.png" />
+    <Content Include="catIcons\air_conditioners.png" />
+    <Content Include="catIcons\air_coolers.png" />
+    <Content Include="catIcons\audio_players.png" />
+    <Content Include="catIcons\automotive.png" />
+    <Content Include="catIcons\Babys Room.png" />
+    <Content Include="catIcons\baby_care.png" />
+    <Content Include="catIcons\bags_wallets_belts.png" />
+    <Content Include="catIcons\Barbell.png" />
+    <Content Include="catIcons\Beach.png" />
+    <Content Include="catIcons\Birthday Cake.png" />
+    <Content Include="catIcons\Bra.png" />
+    <Content Include="catIcons\Businessman.png" />
+    <Content Include="catIcons\Businesswoman.png" />
+    <Content Include="catIcons\cameras.png" />
+    <Content Include="catIcons\camera_accessories.png" />
+    <Content Include="catIcons\Car Rental.png" />
+    <Content Include="catIcons\Car.png" />
+    <Content Include="catIcons\Cell Phone.png" />
+    <Content Include="catIcons\Championship Belt.png" />
+    <Content Include="catIcons\Charged Battery.png" />
+    <Content Include="catIcons\Christmas Gift.png" />
+    <Content Include="catIcons\Classic Music.png" />
+    <Content Include="catIcons\Classroom.png" />
+    <Content Include="catIcons\Clothes.png" />
+    <Content Include="catIcons\Coffee Maker.png" />
+    <Content Include="catIcons\computer_components.png" />
+    <Content Include="catIcons\computer_peripherals.png" />
+    <Content Include="catIcons\computer_storage.png" />
+    <Content Include="catIcons\Cooker Hood.png" />
+    <Content Include="catIcons\Crying Baby.png" />
+    <Content Include="catIcons\Currency Exchange.png" />
+    <Content Include="catIcons\Cutting Coupon.png" />
+    <Content Include="catIcons\Data Backup.png" />
+    <Content Include="catIcons\Deliver Food.png" />
+    <Content Include="catIcons\desktops.png" />
+    <Content Include="catIcons\Electrical.png" />
+    <Content Include="catIcons\eyewear.png" />
+    <Content Include="catIcons\e_learning.png" />
+    <Content Include="catIcons\Fireman Boots.png" />
+    <Content Include="catIcons\Flash Light.png" />
+    <Content Include="catIcons\food_nutrition.png" />
+    <Content Include="catIcons\fragrances.png" />
+    <Content Include="catIcons\furniture.png" />
+    <Content Include="catIcons\gaming.png" />
+    <Content Include="catIcons\Google Mobile.png" />
+    <Content Include="catIcons\grooming_beauty_wellness.png" />
+    <Content Include="catIcons\Headset_2.png" />
+    <Content Include="catIcons\Hole Punch.png" />
+    <Content Include="catIcons\home_and_kitchen_needs.png" />
+    <Content Include="catIcons\home_appliances.png" />
+    <Content Include="catIcons\home_decor_and_festive_needs.png" />
+    <Content Include="catIcons\home_entertainment.png" />
+    <Content Include="catIcons\home_furnishing.png" />
+    <Content Include="catIcons\home_improvement_tools.png" />
+    <Content Include="catIcons\household_supplies.png" />
+    <Content Include="catIcons\jewellery.png" />
+    <Content Include="catIcons\kids_clothing.png" />
+    <Content Include="catIcons\kids_footwear.png" />
+    <Content Include="catIcons\kitchen_appliances.png" />
+    <Content Include="catIcons\landline_phones.png" />
+    <Content Include="catIcons\laptops.png" />
+    <Content Include="catIcons\laptop_accessories.png" />
+    <Content Include="catIcons\luggage_travel.png" />
+    <Content Include="catIcons\Mens Underwear.png" />
+    <Content Include="catIcons\mens_footwear.png" />
+    <Content Include="catIcons\microwave_ovens.png" />
+    <Content Include="catIcons\mobiles.png" />
+    <Content Include="catIcons\mobile_accessories.png" />
+    <Content Include="catIcons\Motorcycle.png" />
+    <Content Include="catIcons\Move by Trolley.png" />
+    <Content Include="catIcons\music_movies_posters.png" />
+    <Content Include="catIcons\network_components.png" />
+    <Content Include="catIcons\Noodles.png" />
+    <Content Include="catIcons\Old Time Camera.png" />
+    <Content Include="catIcons\Passport.png" />
+    <Content Include="catIcons\pet_supplies.png" />
+    <Content Include="catIcons\Plus 1 Hour.png" />
+    <Content Include="catIcons\Portrait.png" />
+    <Content Include="catIcons\Prelum.png" />
+    <Content Include="catIcons\Price Tag.png" />
+    <Content Include="catIcons\Processor.png" />
+    <Content Include="catIcons\Railroad Car.png" />
+    <Content Include="catIcons\refrigerator.png" />
+    <Content Include="catIcons\Rock Music.png" />
+    <Content Include="catIcons\Rupee.png" />
+    <Content Include="catIcons\Shopping Cart Loaded.png" />
+    <Content Include="catIcons\SMS.png" />
+    <Content Include="catIcons\software.png" />
+    <Content Include="catIcons\Sport Net.png" />
+    <Content Include="catIcons\sports_fitness.png" />
+    <Content Include="catIcons\Starred Ticket.png" />
+    <Content Include="catIcons\stationery_office_supplies.png" />
+    <Content Include="catIcons\Suitcase.png" />
+    <Content Include="catIcons\sunglasses.png" />
+    <Content Include="catIcons\System Information.png" />
+    <Content Include="catIcons\tablets.png" />
+    <Content Include="catIcons\tablet_accessories.png" />
+    <Content Include="catIcons\Teddy Bear.png" />
+    <Content Include="catIcons\televisions.png" />
+    <Content Include="catIcons\toys.png" />
+    <Content Include="catIcons\Tram 2.png" />
+    <Content Include="catIcons\Trolleybus.png" />
+    <Content Include="catIcons\tv_video_accessories.png" />
+    <Content Include="catIcons\Vegetarian Food.png" />
+    <Content Include="catIcons\video_players.png" />
+    <Content Include="catIcons\washing_machine.png" />
+    <Content Include="catIcons\watches.png" />
+    <Content Include="catIcons\wearable_smart_devices.png" />
+    <Content Include="catIcons\womens_clothing.png" />
+    <Content Include="catIcons\womens_footwear.png" />
+    <Content Include="BaseCategory.aspx" />
+    <Content Include="Dashboard.aspx" />
+    <Content Include="Coupon.aspx" />
+    <Content Include="js\hilitor.js" />
+    <Content Include="WishList.aspx" />
     <Content Include="css\m2.css" />
     <Content Include="css\final.css" />
     <Content Include="css\footer-style.css" />
@@ -990,11 +1107,17 @@
     <Content Include="images\shop Now.png" />
     <Content Include="images\shop.png" />
     <Content Include="images\slide-empty.jpg" />
+    <Content Include="images\social\Facebook.png" />
+    <Content Include="images\social\GooglePlus.png" />
+    <Content Include="images\social\LinkedIn.png" />
+    <Content Include="images\social\Pin.png" />
+    <Content Include="images\social\Twitter.png" />
     <Content Include="images\topbg.jpg" />
     <Content Include="index.html" />
     <Content Include="InfiniteScroll1.aspx" />
     <Content Include="InfiniteScroll2.aspx" />
     <Content Include="js\caller.js" />
+    <Content Include="js\Copy of custom.js" />
     <Content Include="js\customCalls.js" />
     <Content Include="js\custom.js" />
     <Content Include="js\imagesloaded.pkgd.js" />
@@ -1010,6 +1133,7 @@
     <Content Include="obj\Debug\com.fokatdeals.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\com.fokatdeals.dll" />
     <Content Include="obj\Debug\com.fokatdeals.pdb" />
+    <Content Include="preview.html" />
     <Content Include="RestCallSample.aspx" />
     <Content Include="service.aspx" />
     <Content Include="tracking.aspx" />
@@ -1020,6 +1144,7 @@
     <Content Include="Category.aspx" />
     <Content Include="Brand.aspx" />
     <Content Include="AllBrand.aspx" />
+    <Content Include="Search.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Data\AFFILIATE\AffiliateConstants.cs" />
@@ -1030,6 +1155,10 @@
     <Compile Include="App_Data\AppCommon.cs" />
     <Compile Include="App_Data\AppConstants.cs" />
     <Compile Include="App_Data\CommonDAL.cs" />
+    <Compile Include="App_Data\CouponDAL.cs" />
+    <Compile Include="App_Data\model\CouponModel.cs" />
+    <Compile Include="App_Data\model\SubCategoryModel.cs" />
+    <Compile Include="App_Data\model\TrackingModel.cs" />
     <Compile Include="App_Data\StoreDAL.cs" />
     <Compile Include="App_Data\EncryptDecryptQueryString.cs" />
     <Compile Include="App_Data\model\CommonModel.cs" />
@@ -1042,6 +1171,34 @@
     <Compile Include="App_Data\UserDAL.cs" />
     <Compile Include="App_Data\model\ConstantModel.cs" />
     <Compile Include="App_Data\ProductDAL.cs" />
+    <Compile Include="BaseCategory.aspx.cs">
+      <DependentUpon>BaseCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseCategory.aspx.designer.cs">
+      <DependentUpon>BaseCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Coupon.aspx.cs">
+      <DependentUpon>Coupon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Coupon.aspx.designer.cs">
+      <DependentUpon>Coupon.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WishList.aspx.cs">
+      <DependentUpon>WishList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WishList.aspx.designer.cs">
+      <DependentUpon>WishList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="fd-admin\Admin.Master.cs">
       <DependentUpon>Admin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1145,6 +1302,7 @@
     <Compile Include="Brand.aspx.designer.cs">
       <DependentUpon>Brand.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SvgHandler.cs" />
     <Compile Include="tracking.aspx.cs">
       <DependentUpon>tracking.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1158,6 +1316,13 @@
     </Compile>
     <Compile Include="AllBrand.aspx.designer.cs">
       <DependentUpon>AllBrand.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Search.aspx.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Search.aspx.designer.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,7 @@
 
     setting: { startline: 100, scrollto: 0, scrollduration: 1000, fadeduration: [500, 100] },
 
-    controlHTML: '<img src="../images/arrow29.png" style="width:70%;"/>', //HTML for control, which is auto wrapped in DIV w/ ID="topcontrol"
+    controlHTML: "<img src= 'http://" + window.location.host + "/images/arrow29.png' style='width:70%;'/>", //HTML for control, which is auto wrapped in DIV w/ ID="topcontrol"
 
     controlattrs: { offsetx: 0, offsety: 10 }, //offset of control relative to right/ bottom of window corner
 

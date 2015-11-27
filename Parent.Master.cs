@@ -21,6 +21,7 @@ namespace com.fokatdeals
                     offlineSession.Value = sessionId.Value;
                     sessionUser.Value = Session[AppConstants.SESSION_USERNAME].ToString();
                     sessionUserId.Value = Session[AppConstants.SESSION_USER_ID].ToString();
+                    contactEmail.Value = Session[AppConstants.SESSION_EMAIL_ID].ToString();
                 }
                 else 
                 {

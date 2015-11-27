@@ -13,6 +13,15 @@ namespace com.fokatdeals {
     public partial class Parent {
         
         /// <summary>
+        /// contactEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl contactEmail;
+        
+        /// <summary>
         /// signIn control.
         /// </summary>
         /// <remarks>
@@ -83,6 +92,15 @@ namespace com.fokatdeals {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden callBackPrdUrl;
+        
+        /// <summary>
+        /// cphHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder cphHeader;
         
         /// <summary>
         /// cphMain control.
