@@ -46,8 +46,9 @@ jQuery(document).ready(function ($) {
 
 	//close modal
 	$('#menuPopup').on('click', function (event) {
-		if( $(event.target).is($form_modal) || $(event.target).is('.cd-close-form') ) {
-		    $form_modal.removeClass('is-visible');
+	    if ($(event.target).is($form_modal) || $(event.target).is('.cd-close-form')) {
+	        $form_modal.removeClass('is-visible');
+	        
 		}	
 	});
 	//close modal when clicking the esc keyboard button
@@ -93,37 +94,39 @@ jQuery(document).ready(function ($) {
 	    event.preventDefault();
 	    var username = $('#signin-email').val();
 	    var password = $('#signin-password').val();
-	    debugger;
-	    var obj = '{'
-        + '"username" : "'+username+'",'
-         + '"password"  : "' + password + '",'
-        + '"data"  : ""'
-        + '}';
-	    serverCallLoginUser(obj);
-		//$form_login.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
+	    if (validateLogin(username,password)) {
+	        var obj = '{'
+            + '"username" : "' + username + '",'
+             + '"password"  : "' + password + '",'
+            + '"data"  : ""'
+            + '}';
+	        serverCallLoginUser(obj);
+	    }
 	});
+
 	$form_signup.find('input[type="submit"]').on('click', function(event){
 	    event.preventDefault();
-	    var username = $('#signup-username').val(),
-            password = $('#signup-password').val(),
-            email = $('#signup-email').val();
-	    var obj = '{'
-       + '"username" : "' + username + '",'
-       + '"password"  : "' + password + '",'
-       + '"email"  : "' + email + '",'
-        + '"data"  : ""'
-       + '}';
-	    debugger;
-	    serverCallRegisterUser(obj);
-		//$form_signup.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
+	    var username = $('#signup-username').val();
+	    var phone = $('#signup-password').val();
+        var email = $('#signup-email').val();
+        if (validateRegister(username, email, phone)) {
+	        var obj = '{'
+           + '"username" : "' + username + '",'
+           + '"email"  : "' + email + '",'
+           + '"phone"  : "' + phone + '",'
+            + '"data"  : ""'
+           + '}';
+	        serverCallRegisterUser(obj);
+	    }
 	});
 	$form_forgot_password.find('input[type="submit"]').on('click', function (event) {
 	    event.preventDefault();
-	    var obj = '{'
-       + '"email" : "' +  $('#reset-email').val() + '"'
-       + '}';
-	    debugger;
-	    serverCallChangePassword(obj);
+	    if (validateForgotPassword($('#reset-email').val())) {
+	        var obj = '{'
+           + '"email" : "' + $('#reset-email').val() + '"'
+           + '}';
+	        serverCallChangePassword(obj);
+	    }
 	    //$form_signup.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
 	});
 
@@ -167,17 +170,6 @@ jQuery.fn.putCursorAtEnd = function() {
 	});
 };
 
-//function updateWishListFromStorage()
-//{
-//    if (sessionId.val() != '')
-//    {
-//        for (i = 0; i < localStorage.length; i++)
-//        {
-//            var prdid = localStorage.key(i);
-//            updateWishList(prdid);
-//        }
-//    }
-//}
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -234,5 +226,76 @@ function updateHeader(text) {
     else {
         debugger;
         $("#headerTitle").html('<a href=' + resolveUrl("") + '>' + text + '</a>');
+    }
+}
+
+
+function validateLogin(user,pass)
+{
+    var luser = $("#loginEmailErr");
+    var lpass = $("#loginPassErr");
+    if (user == "")
+    {
+        luser.css(cssDisplay);
+        luser.delay(2000).fadeOut(300);
+        luser.text("Enter your username or email-id");
+        return false;
+    }
+    else if (pass == "") {
+        lpass.css(cssDisplay);
+        lpass.delay(2000).fadeOut(300);
+        lpass.text("Enter valid password");
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+
+function validateRegister(user, email, phone) {
+    debugger;
+    var suser = $("#suUserErr");
+    var semail = $("#suEmailErr");
+    var sphone = $("#suPhoneErr");
+    var scheck = $("#suCheck");
+    signUpMessage.text('');
+    if (user == "") {
+        suser.css(cssDisplay);
+        suser.delay(2000).fadeOut(300);
+        suser.text("Enter required username");
+        return false;
+    }
+    else if (email == "") {
+        semail.css(cssDisplay);
+        semail.delay(2000).fadeOut(300);
+        semail.text("Enter required email address");
+        return false;
+    } else if (!validateEmail(email)) {
+        semail.css(cssDisplay);
+        semail.delay(2000).fadeOut(300);
+        semail.text("Enter valid email-id");
+        return false;
+    } else if (phone == "") {
+        sphone.css(cssDisplay);
+        sphone.delay(2000).fadeOut(300);
+        sphone.text("Enter required phone");
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+function validateForgotPassword(email)
+{
+    var fpemail = $("#fpEmailErr");
+    if (email == "") {
+        fpemail.css(cssDisplay);
+        fpemail.delay(2000).fadeOut(300);
+        fpemail.text("Enter required email address");
+        return false;
+    }  else {
+        return true;
     }
 }

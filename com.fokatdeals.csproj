@@ -155,6 +155,7 @@
     <Content Include="catIcons\Price Tag.png" />
     <Content Include="catIcons\Processor.png" />
     <Content Include="catIcons\Railroad Car.png" />
+    <Content Include="catIcons\recharge.png" />
     <Content Include="catIcons\refrigerator.png" />
     <Content Include="catIcons\Rock Music.png" />
     <Content Include="catIcons\Rupee.png" />
@@ -184,9 +185,19 @@
     <Content Include="catIcons\womens_clothing.png" />
     <Content Include="catIcons\womens_footwear.png" />
     <Content Include="BaseCategory.aspx" />
+    <Content Include="js\rechargeIt.js" />
+    <Content Include="paymentResponseFail.aspx" />
+    <Content Include="paymentResponse.aspx" />
     <Content Include="Dashboard.aspx" />
     <Content Include="Coupon.aspx" />
+    <Content Include="images\datacard.png" />
+    <Content Include="images\dth.png" />
+    <Content Include="images\mobile.png" />
     <Content Include="js\hilitor.js" />
+    <Content Include="js\jquery.ddslick.js" />
+    <Content Include="rechargeResponse.aspx" />
+    <Content Include="rechargeService.aspx" />
+    <Content Include="RechargeNow.aspx" />
     <Content Include="WishList.aspx" />
     <Content Include="css\m2.css" />
     <Content Include="css\final.css" />
@@ -1159,6 +1170,8 @@
     <Compile Include="App_Data\model\CouponModel.cs" />
     <Compile Include="App_Data\model\SubCategoryModel.cs" />
     <Compile Include="App_Data\model\TrackingModel.cs" />
+    <Compile Include="App_Data\PAYMENT\PayUMoneyHandler.cs" />
+    <Compile Include="App_Data\RECHARGE\RechargeDAL.cs" />
     <Compile Include="App_Data\StoreDAL.cs" />
     <Compile Include="App_Data\EncryptDecryptQueryString.cs" />
     <Compile Include="App_Data\model\CommonModel.cs" />
@@ -1178,6 +1191,20 @@
     <Compile Include="BaseCategory.aspx.designer.cs">
       <DependentUpon>BaseCategory.aspx</DependentUpon>
     </Compile>
+    <Compile Include="paymentResponseFail.aspx.cs">
+      <DependentUpon>paymentResponseFail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paymentResponseFail.aspx.designer.cs">
+      <DependentUpon>paymentResponseFail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paymentResponse.aspx.cs">
+      <DependentUpon>paymentResponse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paymentResponse.aspx.designer.cs">
+      <DependentUpon>paymentResponse.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1191,6 +1218,27 @@
     </Compile>
     <Compile Include="Coupon.aspx.designer.cs">
       <DependentUpon>Coupon.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="rechargeResponse.aspx.cs">
+      <DependentUpon>rechargeResponse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="rechargeResponse.aspx.designer.cs">
+      <DependentUpon>rechargeResponse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="rechargeService.aspx.cs">
+      <DependentUpon>rechargeService.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="rechargeService.aspx.designer.cs">
+      <DependentUpon>rechargeService.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RechargeNow.aspx.cs">
+      <DependentUpon>RechargeNow.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RechargeNow.aspx.designer.cs">
+      <DependentUpon>RechargeNow.aspx</DependentUpon>
     </Compile>
     <Compile Include="WishList.aspx.cs">
       <DependentUpon>WishList.aspx</DependentUpon>

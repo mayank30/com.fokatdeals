@@ -26,6 +26,7 @@ $(window).load(function () {
         $("#recent").html(localStorage.getItem("recent"));
     }
     $("#catMenu").html(getBaseCategory('Y'));
+    OnLoadCall();
 });
 $(window).scroll(function () {
     debugger;

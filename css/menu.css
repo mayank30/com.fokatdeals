@@ -29,7 +29,9 @@ cursor:pointer;
 	float:right;
 	-webkit-border-radius:2px 2px 2px 2px;
 	-moz-border-radius:2px 2px 2px 2px;
-	border-radius:2px 2px 2px 2px;}
+	border-radius:2px 2px 2px 2px;
+
+}
 
 .wsmenu-list{
 	text-align:left;
@@ -257,6 +259,7 @@ cursor:pointer;
 	-moz-transform: rotateX(-75deg);
 	-webkit-transform: rotateX(-75deg);
 	visibility:hidden;
+
 }
 
 .wsmenu-list li:hover > .wsmenu-submenu{
@@ -278,6 +281,8 @@ cursor:pointer;
 	-moz-transform: rotateX(-75deg);
 	-webkit-transform: rotateX(-75deg);
 	visibility:hidden;
+
+
 }
 
 .wsmenu-submenu li:hover > .wsmenu-submenu-sub{
@@ -299,6 +304,8 @@ cursor:pointer;
 	-moz-transform: rotateX(-75deg);
 	-webkit-transform: rotateX(-75deg);
 	visibility:hidden;
+
+
 }
 
 .wsmenu-submenu-sub li:hover > .wsmenu-submenu-sub-sub{
@@ -321,6 +328,7 @@ cursor:pointer;
 	-moz-transform: rotateX(-75deg);
 	-webkit-transform: rotateX(-75deg);
 	visibility:hidden;
+
 }
 
 .wsmenu-list li:hover > .megamenu{
@@ -330,6 +338,7 @@ cursor:pointer;
 	-webkit-transform: rotateX(0deg);
 	opacity: 1;
 	visibility:visible;
+
 }
 
 
@@ -350,7 +359,11 @@ cursor:pointer;
 	-o-transition: -o-transform 0.3s, opacity 0.3s;
 	-ms-transition: -ms-transform 0.3s, opacity 0.3s;
 	-moz-transition: -moz-transform 0.3s, opacity 0.3s;
-	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;}
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+
+
+
+}
 
 .wsmenu-submenu li a {
 	background:#fff !important;
@@ -381,7 +394,10 @@ cursor:pointer;
 	-o-transition: -o-transform 0.4s, opacity 0.4s;
 	-ms-transition: -ms-transform 0.4s, opacity 0.4s;
 	-moz-transition: -moz-transform 0.4s, opacity 0.4s;
-	-webkit-transition: -webkit-transform 0.4s, opacity 0.4s;}
+	-webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
+
+
+}
 
 .wsmenu-list .wsmenu-submenu li:hover .wsmenu-submenu-sub{opacity:1; list-style:none; padding:2px; border:solid 1px #eeeeee; background-color:#fff;}
 .wsmenu-list .wsmenu-submenu li:hover .wsmenu-submenu-sub{display:block;}

@@ -4,7 +4,9 @@
     <div id="first" class="item">
         <div class="row">
             <div class="col-lg-6 imageHolder">
+                <div class="prdImageBox">
                 <img id="imageCall" src="" class="row prdImage" />
+                    </div>
                  <div id="bottom" class="row">
                     <a id="fb" title="Share me on Facebook" target="_blank">
                         <img src='<%=ResolveUrl("images/social/Facebook.png")%>' /></a>

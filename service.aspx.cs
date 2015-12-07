@@ -145,7 +145,7 @@ namespace com.fokatdeals
         }
 
         [WebMethod]
-        public static String Register(String username, String password, String email,String data)
+        public static String Register(String username, String email, String phone, String data)
         {
             UserDAL dal = new UserDAL();
             JavaScriptSerializer ser = new JavaScriptSerializer();
@@ -153,21 +153,26 @@ namespace com.fokatdeals
             try
             {
                 user.username = username;
-                user.password = password;
+                user.password = CreatePassword(6);
                 user.email = email;
+                user.phone = phone;
+                user.sessionId = user.UniqueId();
                 user.loggedSource = LeadSource.Direct.ToString();
                 user.userType = UserType.Guest.ToString();
                 user.status = AppConstants.ACTIVATE;
                 int i = dal.InsertAccountUser(user);
                 if (i >= 1)
                 {
+                    user.id = i+"";
                     user.errorCode = (int)Errors.RegisterSuccess;
                     user.errorMessage = "Welcome " + username;
                     setUserSession(user);
+                    //Send Email and Send SMS
+                    EmailUtil.RegisterEmail(user.email, user.username, user.password);
                 }
                 else {
                     user.errorCode = (int)Errors.RegisterError;
-                    user.errorMessage = "Invalid form details";
+                    user.errorMessage = "User already exist, Please provide the unique details";
                 }
             }
             catch {
@@ -178,35 +183,26 @@ namespace com.fokatdeals
         }
 
         [WebMethod]
-        public static String ChangePassword(String email)
+        public static String ForgotPassword(String email)
         {
             UserDAL dal = new UserDAL();
             JavaScriptSerializer ser = new JavaScriptSerializer();
             UserModel user = new UserModel();
             try
             {
-                String pass = CreatePassword(8);
+                String pass = CreatePassword(6);
                 int i = dal.ChangePassword(email,pass);
                 if (i >= 1)
                 {
                     user.errorCode = (int)Errors.ChangePasswordSuccess;
                     user.errorMessage = "We have successfully change the password, Please check your mail for updated password.";
                     setUserSession(user);
-                    Thread sendEmail = new Thread(delegate()
-                    {
-                        EmailUtil emailUser =  new EmailUtil();
-                         String[] to = new string[] { email };
-                        string[] cc = AppConstants.EMAIL_REQUIRED_CC;
-                        string[] bcc = AppConstants.EMAIL_REQUIRED_BCC;
-                        emailUser.SendEmail(to, cc, bcc, AppConstants.EMAIL_CHANGE_PASSWORD_SUBJECT, "Password : "+pass, "");
-                    });
-                    sendEmail.IsBackground = true;
-                    sendEmail.Start();
+                    EmailUtil.ForgotPasswordEmail(email, "", pass);
                 }
                 else
                 {
                     user.errorCode = (int)Errors.ChangePasswordError;
-                    user.errorMessage = "Invalid form details";
+                    user.errorMessage = "Invalid Email id or Phone #";
                 }
             }
             catch
@@ -441,6 +437,27 @@ namespace com.fokatdeals
 
 
         #endregion 
+
+        #region "Contact Us"
+        [WebMethod]
+        public static String CreateTicket(String rply,String sub,String msg)
+        {
+            CommonModel user = new CommonModel();
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            try
+            {
+                EmailUtil.CreateSupportTicket(rply, sub, msg);
+                user.errorCode = (int)Errors.RegisterError;
+                user.errorMessage = "Thank you, Our Support team will get in touch with you shortly.";
+            }
+            catch
+            {
+                user.errorCode = (int)Errors.RegisterError;
+                user.errorMessage = "Data already Exist.";
+            }
+            return ser.Serialize(user);
+        }
+        #endregion
 
     }
 

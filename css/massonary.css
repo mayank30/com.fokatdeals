@@ -189,6 +189,11 @@
         max-height: 280px;
         max-width: 250px;
     }
+       #first .prdImageBox {
+           vertical-align:middle;
+        height: 280px;
+        max-width: 250px;
+    }
 
 .imageHolder {
     vertical-align: middle;

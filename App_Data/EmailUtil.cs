@@ -13,7 +13,28 @@ using System.Threading;
 /// </summary>
 public class EmailUtil
 {
-    public void SendEmail(string[] to, string[] cc, string[] bcc, string subject, string body, string postedFile)
+    private static  String SUBJECT { get; set; }
+    private static  String MESSAGE { get; set; }
+    private static String[] CC = {"fokatd@gmail.com","mayankjhawar18@gmail.com"};
+    private static String support = "fokatdealscomsupport@fokat.freshdesk.com";
+
+    public static  String[] BCC
+    {
+        get { return CC; }
+    }
+
+    public static void CreateSupportTicket(string reply, string subject, string body)
+    {
+        String[] to = { support };
+        Thread email = new Thread(delegate()
+        {
+            SendEmail(to, null, BCC, subject, body, "", reply);
+        });
+        email.IsBackground = true;
+        email.Start();
+    }
+
+    public static void SendEmail(string[] to, string[] cc, string[] bcc, string subject, string body, string postedFile,string reply)
     {
         string from = "fokatd@gmail.com";
         using (MailMessage mailMessage = new MailMessage())
@@ -22,6 +43,11 @@ public class EmailUtil
             mailMessage.Sender = from1;
             mailMessage.From = from1;
             mailMessage.Subject = subject;
+            if (reply != null)
+            {
+                mailMessage.Headers.Add("reply-to", reply);
+                mailMessage.ReplyToList.Add(new MailAddress(reply, reply));
+            }
             mailMessage.IsBodyHtml = true;
             mailMessage.Body = body;
             if ((to != null) && (to.Length > 0))
@@ -61,4 +87,33 @@ public class EmailUtil
             smtpClient.Send(mailMessage);
         }
     }
+
+    public static void RegisterEmail(String userEmail,String username, String password)
+    {
+        String[] to = { userEmail };
+        SUBJECT = "New User Registration";
+        MESSAGE = "Welcome "+username+","+" Your password :- "+password;
+        Thread email = new Thread(delegate()
+        {
+            SendEmail(to, null, BCC, SUBJECT, MESSAGE, "", null);
+        });
+        email.IsBackground = true;
+        email.Start();
+        
+    }
+
+    public static void ForgotPasswordEmail(String userEmail, String phone, String password)
+    {
+        String[] to = { userEmail };
+        SUBJECT = "Forgot Password";
+        MESSAGE = "Welcome " + userEmail + "," + " Your New Password :- " + password;
+        Thread email = new Thread(delegate()
+        {
+            SendEmail(to, null, BCC, SUBJECT, MESSAGE, "", null);
+        });
+        email.IsBackground = true;
+        email.Start();
+
+    }
+
 }

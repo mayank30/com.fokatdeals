@@ -4,6 +4,8 @@
     transitionDuration: '0.8s',
     isResizeBound: true
 });
+var cssDisplay = { 'display': 'inline-block' };
+var cssNoDisplay = { 'display': 'none' };
 var myAccountMenu = $('#myAccount'),
         signInMenu = $('#signIn'),
         sessionId = $('#sessionId'),
@@ -100,9 +102,12 @@ function serverCallLoginUser(dataValue) {
        cache: false,
        success: function (msg) {
            var items = JSON.parse(msg.d);
-           debugger;
            if (items["errorCode"] == 101) {
-               $form_modal.removeClass('is-visible');
+               $('#loader').show();
+               setTimeout(function () {
+                   $('#loader').hide();
+                   $form_modal.removeClass('is-visible');
+               }, 600);
                myAccountMenu.show();
                signInMenu.hide();
                console.log(items["email"]);
@@ -110,17 +115,12 @@ function serverCallLoginUser(dataValue) {
                sessionUser.val(items["username"]);
                sessionOffline.val(items["sessionId"]);
                email.val(items["email"]);
-               debugger;
-               if (callBackPrdUrl.val() != '') {
-                   window.open(callBackPrdUrl.val(), '_blank');
-               }
-
+               doProcessOnAuthentication();
            }
            else {
                myAccountMenu.hide();
                signInMenu.show();
-               form[0].reset();
-               signInMessage.text(items["errorMessage"]);
+               signInMessage.text("Invalid Login Details");
            }
        },
        error: function (x, e) {
@@ -142,18 +142,23 @@ function serverCallRegisterUser(dataValue) {
        cache: false,
        success: function (msg) {
            var items = JSON.parse(msg.d);
-           debugger;
            if (items["errorCode"] == 201) {
-               $form_modal.removeClass('is-visible');
+               $('#loader').show();
+               setTimeout(function () {
+                   $('#loader').hide();
+                   $form_modal.removeClass('is-visible');
+               }, 600);
                myAccountMenu.show();
                signInMenu.hide();
                sessionId.val(items["sessionId"]);
                sessionUser.val(items["username"]);
+               sessionOffline.val(items["sessionId"]);
+               email.val(items["email"]);
+               doProcessOnAuthentication();
            }
            else {
                myAccountMenu.hide();
                signInMenu.show();
-               form[0].reset();
                signUpMessage.text(items["errorMessage"]);
            }
        },
@@ -168,7 +173,7 @@ function serverCallChangePassword(dataValue) {
     $.ajax(
    {
        type: "POST",
-       url: resolveUrl("/service.aspx/ChangePassword"),
+       url: resolveUrl("/service.aspx/ForgotPassword"),
        data: dataValue,
        contentType: "application/json; charset=utf-8",
        dataType: "json",
@@ -183,7 +188,6 @@ function serverCallChangePassword(dataValue) {
                login_selected();
            }
            else {
-               form[0].reset();
                $('#changePassword').text(items["errorMessage"]);
            }
        },
@@ -352,17 +356,41 @@ function MyHTML3() {
     return '<div id="first" class="item"><div class="row"><div class="col-lg-6"><img src="http://img6a.flixcart.com/image/watch/z/e/f/a1012-01-giordano-400x400-imadxv7vdgjyfnxg.jpeg" class="prdImage"/></div><div class="col-lg-6"><div class="row prdName clearfix">Product Name</div><br /><div class="row prdName clearfix">Descripton</div><br /><div class="row prdPrice clearfix"> 100 /-</div><br /><div class="row clearfix"><img src="images/shop Now.png" style="max-height:50px;" /></div><div class="row"><p>Share this with your friends and family</p><img src="images/icons.png" /> <p>product saved in your recent search.</p></div></div></div></div>';
 }
 
-function showPopup(dataValue, display, dontOpen) {
+function doProcessOnAuthentication()
+{
+    debugger;
+    console.log($("#rechargeMe").val());
+   
+    if (callBackPrdUrl.val() != '') {
+        if (callBackPrdUrl.val() == "RECHARGE") {
+            goToPaymentGateway($("#rechargeMe").val());
+        }
+        else {
+            window.open(callBackPrdUrl.val(), '_blank');
+        }
+    }
+
+}
+
+function showPopup(dataValue, display, dontOpen,recharge) {
     var url = resolveUrl("/tracking.aspx?id=" + dataValue);
     callBackPrdUrl.val(url);
+    if (dataValue == null) {
+        callBackPrdUrl.val('');
+    }
+    if (recharge != null)
+    {
+        $("#rechargeMe").val(recharge);
+        callBackPrdUrl.val(dontOpen)
+    }
     if (sessionId.val() != "") {
         debugger;
         //redirect to tracking page.
         if (dontOpen == null) {
             window.open(url, '_blank');
         }
-        else {
-            // window.location.href = "tracking.aspx?id="+dataValue;
+        else if (dontOpen == "RECHARGE") {
+            goToPaymentGateway($("#rechargeMe").val());
         }
         return true;
     }
@@ -460,6 +488,27 @@ function imgError(image) {
 function resolveUrl(serviceUrl) {
     var returnUrl = "http://" + window.location.host + serviceUrl;
     return returnUrl;
+}
+
+function goToPaymentGateway(obj) {
+    $.ajax(
+            {
+                type: "POST",
+                url: resolveUrl("/rechargeService.aspx/RequestPayUMoney"),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: obj,
+                async: false,
+                cache: false,
+                success: function (msg) {
+                    debugger;
+                    $("body").append(msg.d);
+                },
+                error: function (x, e) {
+                    console.log("The call to the server side failed. " + x.responseText);
+                }
+            });
+   // return callPay;
 }
 
 function serverCallGetProductWishListMark(dataValue) {
@@ -672,7 +721,6 @@ function getCoupon(dataValue) {
 }
 
 function CouponHTMLCode(cpn) {
-    alert(cpn.Product); 
     var tempStr = '<div class="item coupon"><a href=' + cpn.TrackingUrl + '>' +
             '<img src='+cpn.Product+' class="brdCpn" onerror="imgError(this);"></a>' +
             '<div class="code">' +
@@ -685,4 +733,150 @@ function CouponHTMLCode(cpn) {
     return tempStr;
 }
 
+/********  Contact Us  **************/
+function validateContact()
+{
+    var cemail = $("#contactEmail");
+    var csub = $("#contactSubject");
+    var cmsg = $("#contactMessage");
+    var cemailerr = $("#contactEmailError");
+    var csuberr = $("#contactSubjectError");
+    var cmsgerr = $("#contactMessageError");
+   
+    count = 0;
+    if (cemail.val() == "")
+    {
+        cemail.focus();
+        cemailerr.css(cssDisplay);
+        cemailerr.delay(2000).fadeOut(300);
+        cemailerr.text("Enter required email-id");
+        return false;
+    }
+    else if (!validateEmail(cemail.val())) {
+        cemail.focus();
+        cemailerr.css(cssDisplay);
+        cemailerr.delay(2000).fadeOut(300);
+        cemailerr.text("Enter valid email-id");
+        return false;
+    }
+    else  if (csub.val() == "")
+    {
+        csuberr.focus();
+        csuberr.css(cssDisplay);
+        csuberr.delay(2000).fadeOut(300);
+        csuberr.text("Enter your query");
+        return false;
+    }
+    else if (cmsg.val() == "") {
+        cmsgerr.css(cssDisplay);
+        cmsgerr.focus();
+        cmsgerr.delay(2000).fadeOut(300);
+        cmsgerr.text("Enter your message");
+        return false;
+    }
+    else {
+        cemailerr.css(cssNoDisplay);
+        csuberr.css(cssNoDisplay);
+        cmsgerr.css(cssNoDisplay);
+        return true;}
+}
 
+function ContactMe() {
+    $("#contactBtn").click(function () {
+        
+        if (validateContact()) {
+       var dataValue = '{'
+         + '"rply"  : "' + $("#contactEmail").val() + '",'
+         + '"sub"  : "' + $("#contactSubject").val() + '",'
+         + '"msg"  : "' + $("#contactMessage").val() + '"'
+        + '}';
+       $.ajax(
+       {
+           type: "POST",
+           url: resolveUrl("/service.aspx/CreateTicket"),
+           contentType: "application/json; charset=utf-8",
+           dataType: "json",
+           data: dataValue,
+           async: false,
+           cache: false,
+           success: function (msg) {
+               var items = JSON.parse(msg.d);
+               $("#cmsg").text(items["errorMessage"]);
+               $("#contactEmail").val("");
+               $("#contactSubject").val("");
+               $("#contactMessage").val("");
+               setTimeout("$('#modal-Contact-Us').modal('hide')", 1000);
+           },
+           error: function (x, e) {
+               alert("The call to the server side failed. " + x.responseText);
+           }
+       }
+   );
+        }
+        else {
+            $("#cmsg").text("Please fill the form correctly.");
+        }
+    });
+}
+
+
+/*Change Password*/
+function ChangePassword()
+{
+    $("#changePassBtn").click(function () {
+        if (validateContact()) {
+            var dataValue = '{'
+              + '"old"  : "' + $("#contactEmail").val() + '",'
+              + '"new"  : "' + $("#contactSubject").val() + '"'
+             + '}';
+            $.ajax(
+            {
+                type: "POST",
+                url: resolveUrl("/service.aspx/CreateTicket"),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: dataValue,
+                async: false,
+                cache: false,
+                success: function (msg) {
+                    var items = JSON.parse(msg.d);
+                    $("#cmsg").text(items["errorMessage"]);
+                    $("#contactEmail").val("");
+                    $("#contactSubject").val("");
+                    $("#contactMessage").val("");
+                    setTimeout("$('#modal-Contact-Us').modal('hide')", 1000);
+                },
+                error: function (x, e) {
+                    alert("The call to the server side failed. " + x.responseText);
+                }
+            }
+        );
+        }
+        else {
+            $("#cmsg").text("Please fill the form correctly.");
+        }
+    });
+    
+}
+
+
+/**********  OnLoad Functions Need to call   *************/
+function OnLoadCall()
+{
+    ContactMe();
+}
+
+
+/**********  Common Validation Methods. *************/
+function validateEmail($email) {
+    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    return emailReg.test($email);
+}
+function isNotEmpty(str) {
+    var pattern = /\S+/;
+    return pattern.test(str);  // returns a boolean
+}
+function isNumber(str) {
+    var pattern = /^\d+$/;
+    return pattern.test(str);  // returns a boolean
+}

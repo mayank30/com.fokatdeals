@@ -23,7 +23,7 @@ namespace com.fokatdeals
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-
+            HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "*");
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
@@ -48,6 +48,12 @@ namespace com.fokatdeals
 
         private void URLMapping(RouteCollection routes)
         {
+            routes.MapPageRoute(
+             "recharge",
+             "all/user/free/recharge/now",
+             "~/RechargeNow.aspx"
+         );
+
             routes.MapPageRoute(
              "coupon",
              "all/brand/free/coupon",

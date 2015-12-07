@@ -15,9 +15,11 @@
     <link href='<%=ResolveUrl("css/style.css")%>' rel="stylesheet" />
 </head>
 <body>
+                                                     
     <div class="centerBtn">
         <a href="#modal-Contact-Us" role="button" data-toggle="modal"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp;Contact Us</a>
     </div>
+  
     <div class="modal fade" id="modal-Contact-Us" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
 
@@ -28,39 +30,35 @@
                     <h1 style="font-size: large;">Contact Us</h1>
                 </div>
                 <div class="modal-body">
-
-                    <div id="Div2">
-                       
                         <div class="cd-form">
+                        
                             <p class="fieldset">
                                 <label class="image-replace cd-email" for="reset-email">Email id</label>
-                                <input class="full-width has-padding has-border" id="contactEmail" type="email" placeholder="Enter Email" runat="server">
-                                <span class="cd-error-message">Error message here!</span>
+                                <input class="full-width has-padding has-border" runat="server" id="contactEmail" type="text" placeholder="Enter Email" runat="server">
+                                <span id="contactEmailError" class="cd-error-message">Error message here!</span>
                             </p>
                             <p class="fieldset">
                                 <label class="image-replace cd-email" for="reset-email">Subject</label>
-                                <input class="full-width has-padding has-border" id="contactSubject" type="text" placeholder="Contact Subject">
-                                <span class="cd-error-message">Error message here!</span>
+                                <input class="full-width has-padding has-border" runat="server" id="contactSubject" type="text" placeholder="Contact Subject">
+                                <span id="contactSubjectError" class="cd-error-message">Error message here!</span>
                             </p>
                             <p class="fieldset">
                                 <label class="image-replace cd-email" for="reset-email">Message</label>
-                                <textarea class="full-width has-padding has-border" id="contactMessage" type="text" placeholder="Contact Message .. " style=" width: 100%; height: 100px;padding-top: 20px;padding-left: 50px;    margin-bottom: -40px;"></textarea>
-                                <span class="cd-error-message">Error message here!</span>
+                                <textarea class="full-width has-padding has-border" runat="server" id="contactMessage" type="text" placeholder="Contact Message .. " style=" width: 100%; height: 100px;padding-top: 20px;padding-left: 50px;    margin-bottom: -40px;"></textarea>
+                                <span id="contactMessageError" class="cd-error-message">Error message here!</span>
                             </p>
                              <!-- reset password form -->
-                        <p class="cd-form-message"></p>
+                        <p id="cmsg" class="cd-form-message"></p>
                             <p class="fieldset">
-                                <input class="full-width has-padding" type="submit" value="Submit">
+                                <input type="submit" id="contactBtn" value="Send" class="full-width has-padding"/>
                             </p>
+                              
                         </div>
-                    </div>
-                    <!-- cd-reset-password -->
                 </div>
             </div>
 
         </div>
-    </div>
-
+    </div>   
     <!-- Header Start -->
     <div class="wsmenucontainer clearfix">
         <div class="wsmenucontent overlapblackbg"></div>
@@ -80,9 +78,12 @@
                 <nav class="wsmenu slideLeft clearfix">
                     <ul class="mobile-sub wsmenu-list">
 
-                        <li><a href="#">
-                            <img alt="Bootstrap Image Preview" src='<%=ResolveUrl("catIcons/deals.png")%>' class="img-circle" />&nbsp;&nbsp;Daily Deals</a>
+                        <li><a href='<%=ResolveUrl("all/user/free/recharge/now")%>'>
+                            <img alt="Bootstrap Image Preview" src='<%=ResolveUrl("catIcons/recharge.png")%>' class="img-circle" />&nbsp;&nbsp;Recharge Now</a>
                         </li>
+                      <%--  <li><a href="#">
+                            <img alt="Bootstrap Image Preview" src='<%=ResolveUrl("catIcons/deals.png")%>' class="img-circle" />&nbsp;&nbsp;Daily Deals</a>
+                        </li>--%>
                         <li><a href='<%=ResolveUrl("all/brand/free/coupon")%>'>
                             <img alt="Bootstrap Image Preview" src='<%=ResolveUrl("catIcons/coupon.png")%>' class="img-circle" />&nbsp;&nbsp;Free Coupons</a>
                         </li>
@@ -129,7 +130,7 @@
                                 <li><a class="borderBottom " href='<%=ResolveUrl("all/user/wishlist/product")%>'><i class='fa fa-heart'></i>WishList </a></li>
                                 <li><a href="#"><i class="fa fa-ticket"></i>Raise Concern</a></li>
                                 <li><a href="#myChangePassword" class="borderBottom " role="button" data-toggle="modal"><i class="fa fa-key"></i>Change Password</a></li>
-                                <li><a href="Logout.aspx"><i class="fa fa-sign-out"></i>Logout</a></li>
+                                <li><a href='<%=ResolveUrl("Logout.aspx")%>'><i class="fa fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -151,9 +152,9 @@
     <input type="hidden" id="ipAddress" runat="server" />
     <input type="hidden" id="offlineSession" runat="server" />
     <input type="hidden" id="callBackPrdUrl" runat="server" />
-
+    <input type="hidden" id="rechargeMe" />
     <!-- Modal -->
-    <div class="modal fade" id="myChangePassword" role="dialog">
+    <div class="modal fade" id="myChangePassword" role="dialog" >
         <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -185,7 +186,7 @@
                              <!-- reset password form -->
                         <p class="cd-form-message"></p>
                             <p class="fieldset">
-                                <input class="full-width has-padding" type="submit" value="Reset password">
+                                <input id="changePassBtn" class="full-width has-padding" type="submit" value="Reset password">
                             </p>
                         </div>
                     </div>
@@ -195,6 +196,8 @@
 
         </div>
     </div>
+
+    
 
 
     <!-- Modal Popup for Sign in / Sign up -->
@@ -215,14 +218,14 @@
                     <p class="fieldset">
                         <label class="image-replace cd-email" for="signin-email">E-mail</label>
                         <input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
-                        <span class="cd-error-message">Error message here!</span>
+                        <span  id="loginEmailErr" class ="cd-error-message">Error message here!</span>
                     </p>
 
                     <p class="fieldset">
                         <label class="image-replace cd-password" for="signin-password">Password</label>
                         <input class="full-width has-padding has-border" id="signin-password" type="password" placeholder="Password">
-                        <a href="#0" class="hide-password">Show</a>
-                        <span class="cd-error-message">Error message here!</span>
+                        <a class="hide-password">Show</a>
+                        <span id="loginPassErr" class="cd-error-message">Error message here!</span>
                     </p>
 
 
@@ -245,24 +248,25 @@
                     <p class="fieldset">
                         <label class="image-replace cd-username" for="signup-username">Username</label>
                         <input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username">
-                        <span class="cd-error-message">Error message here!</span>
+                        <span id="suUserErr" class="cd-error-message">Error message here!</span>
                     </p>
 
                     <p class="fieldset">
                         <label class="image-replace cd-email" for="signup-email">E-mail</label>
                         <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
-                        <span class="cd-error-message">Error message here!</span>
+                        <span id="suEmailErr" class="cd-error-message">Error message here!</span>
                     </p>
 
                     <p class="fieldset">
                         <label class="image-replace cd-password" for="signup-password">Phone</label>
                         <input class="full-width has-padding has-border" id="signup-password" type="text" placeholder="Phone">
-                        <span class="cd-error-message">Error message here!</span>
+                        <span id="suPhoneErr" class="cd-error-message">Error message here!</span>
                     </p>
 
                     <p class="fieldset">
 						<input type="checkbox" id="accept-terms">
 						<label for="accept-terms">I agree to the <a href="#0" target="_blank">Terms</a></label>
+                        <span id="suCheck" class="cd-error-message">Error message here!</span>
 					</p>
 
                     <p class="fieldset">
@@ -282,9 +286,9 @@
                     <p class="fieldset" id="changePassword">
                     </p>
                     <p class="fieldset">
-                        <label class="image-replace cd-email" for="reset-email">E-mail</label>
-                        <input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
-                        <span class="cd-error-message">Error message here!</span>
+                        <label class="image-replace cd-email" for="reset-email">E-mail Or Phone</label>
+                        <input class="full-width has-padding has-border" id="reset-email" type="text" placeholder="E-mail or Phone #">
+                        <span id="fpEmailErr" class="cd-error-message">Error message here!</span>
                     </p>
 
                     <p class="fieldset">
@@ -329,6 +333,7 @@
             <div class="footerwrapper">
                 <div class="footerbar">
                     <div class="container">
+                       
                         <div class="cell">
                             <h3 class="title-2">Pages</h3>
                             <ul class="links">
@@ -407,7 +412,25 @@
                 </div>
                 <div class="copyright">
                     <div class="container">
-                        <p>Copyright &copy; 2015 PixelBeautify &#8211; PinThis Theme Preview</p>
+                        <img src="images/foot1.png" height="80"/><br />
+                       </div>
+                </div>
+                 <div class="container">
+               
+                   <div class="row">
+		<div class="col-md-12">
+            <br />
+            <h3>Welcome to Fokatdeals.com</h3>
+            <p class="footerbar">
+                            The India's number one Smart Website, which provides you thousands of deals, coupons  and free Offers from various online retailer's.
+                            Every time you shop with us, Retailer's will pay us commission, and We will share that commission to you as Cashback. 
+                            This is not enough, there is much more. Your every shopping will help in social cause... 
+                            <br />So Do not wait, and Register to fokatdeals.com !! <b>Shop more and save more !!</b></p>
+		</div>
+	</div> </div>
+                <div class="copyright">
+                    <div class="container">
+                        <p>Copyright &copy; 2015 Fokatdeals.com &#8211; +91-9407393303 - Mayank Jhawar</p>
                     </div>
                 </div>
             </div>
@@ -431,7 +454,7 @@
     <asp:ContentPlaceHolder ID="cphScripts" runat="server">
         <script src='<%=ResolveUrl("js/customCalls.js")%>'></script>
     </asp:ContentPlaceHolder>
+    <script src='<%=ResolveUrl("js/rechargeIt.js")%>'></script>
     <!-- java Script Section End -->
-  
 </body>
 </html>

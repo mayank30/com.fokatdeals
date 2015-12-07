@@ -19,7 +19,25 @@ namespace com.fokatdeals {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl contactEmail;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText contactEmail;
+        
+        /// <summary>
+        /// contactSubject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText contactSubject;
+        
+        /// <summary>
+        /// contactMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea contactMessage;
         
         /// <summary>
         /// signIn control.

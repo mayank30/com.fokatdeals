@@ -20,6 +20,7 @@ namespace com.fokatdeals
             con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString());
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
         public static string ShortenURL(string url)
         {
             string key = "AIzaSyBnGygy5CBFXU1X5omPpMfkAQJ-IwBmBmU";

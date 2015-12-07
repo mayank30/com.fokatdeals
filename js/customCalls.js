@@ -12,5 +12,7 @@ function CallMe(url) {
         $container.masonry('appended', $item);
         $('#loader').hide();
     });
+    rechargeIt();
+
 }
 

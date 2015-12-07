@@ -1,8 +1,8 @@
 E:\com.fokatdeals 1.1\com.fokatdeals\com.fokatdeals\bin\com.fokatdeals.dll
 E:\com.fokatdeals 1.1\com.fokatdeals\com.fokatdeals\bin\com.fokatdeals.pdb
+E:\com.fokatdeals 1.1\com.fokatdeals\com.fokatdeals\bin\com.smsvertical.dll
+E:\com.fokatdeals 1.1\com.fokatdeals\com.fokatdeals\bin\Newtonsoft.Json.dll
+E:\com.fokatdeals 1.1\com.fokatdeals\com.fokatdeals\bin\com.smsvertical.pdb
+E:\com.fokatdeals 1.1\com.fokatdeals\com.fokatdeals\obj\Debug\com.fokatdeals.csprojResolveAssemblyReference.cache
 E:\com.fokatdeals 1.1\com.fokatdeals\com.fokatdeals\obj\Debug\com.fokatdeals.dll
 E:\com.fokatdeals 1.1\com.fokatdeals\com.fokatdeals\obj\Debug\com.fokatdeals.pdb
-E:\com.fokatdeals 1.1\com.fokatdeals\com.fokatdeals\obj\Debug\com.fokatdeals.csprojResolveAssemblyReference.cache
-E:\com.fokatdeals 1.1\com.fokatdeals\com.fokatdeals\bin\Newtonsoft.Json.dll
-E:\com.fokatdeals 1.1\com.fokatdeals\com.fokatdeals\bin\com.smsvertical.dll
-E:\com.fokatdeals 1.1\com.fokatdeals\com.fokatdeals\bin\com.smsvertical.pdb

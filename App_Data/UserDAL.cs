@@ -37,6 +37,7 @@ namespace com.fokatdeals
                 SqlCommand cmd = new SqlCommand("usp_InsertAccountUser", con);
                 cmd.Parameters.AddWithValue("@username", user.username);
                 cmd.Parameters.AddWithValue("@email", user.email);
+                cmd.Parameters.AddWithValue("@phone", user.phone);
                 cmd.Parameters.AddWithValue("@password", user.password);
                 cmd.Parameters.AddWithValue("@loggedSource", user.loggedSource);
                 cmd.Parameters.AddWithValue("@userType", user.userType);

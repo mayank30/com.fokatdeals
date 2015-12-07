@@ -36,7 +36,12 @@ namespace com.fokatdeals
         public static String SESSION_EMAIL_ID = "asda@sdf.com";
         public static String SESSION_USER_TYPE = "g3jkd";
 
+       
+
         public static String EMAIL_CHANGE_PASSWORD_SUBJECT = "Change password email";
+
+        public static String RECHARGE_SUCCESS_URL = DOMAIN_NAME + "paymentResponse.aspx";
+        public static String RECHARGE_FAIL_URL = DOMAIN_NAME + "paymentResponseFail.aspx";
 
     }
 
